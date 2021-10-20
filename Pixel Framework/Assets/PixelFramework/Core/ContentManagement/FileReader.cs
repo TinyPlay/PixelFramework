@@ -119,6 +119,15 @@ namespace PixelFramework.Core.ContentManagement
             TextAsset output = Resources.Load<TextAsset>(pathToFile);
             return output.bytes;
         }
+
+        /// <summary>
+        /// Delete File
+        /// </summary>
+        /// <param name="pathToFile"></param>
+        public static void DeleteFile(string pathToFile)
+        {
+            if(File.Exists(pathToFile)) File.Delete(pathToFile);
+        }
         #endregion
 
         #region Save Files
