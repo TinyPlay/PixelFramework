@@ -105,13 +105,13 @@ namespace PixelFramework.Managers
         }
         #endregion
 
-        #region Network Manager Logic
+        #region Network Manager Queue
         /// <summary>
         /// Add Request to Queue
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public NetworkManager AddRequest(INetRequest request)
+        public NetworkManager AddRequestToQueue(INetRequest request)
         {
             _requestQueue.Add(request);
             return _instance;
@@ -122,7 +122,7 @@ namespace PixelFramework.Managers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public NetworkManager RemoveRequest(INetRequest request)
+        public NetworkManager RemoveRequestFromQueue(INetRequest request)
         {
             _requestQueue.Remove(request);
             return _instance;
@@ -177,6 +177,85 @@ namespace PixelFramework.Managers
                 
                 yield return new WaitForSeconds(_config.QueueRequestsInterval);
             }
+        }
+        #endregion
+
+        #region Network Manager Requests
+        /// <summary>
+        /// Send Request
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public NetworkManager SendRequest(WebRequest request)
+        {
+            request.SendRequest();
+            return _instance;
+        }
+        
+        /// <summary>
+        /// Send Request
+        /// </summary>
+        /// <param name="downloadRequest"></param>
+        /// <returns></returns>
+        public NetworkManager SendRequest(INetRequest downloadRequest)
+        {
+            downloadRequest.SendRequest();
+            return _instance;
+        }
+
+        /// <summary>
+        /// Downloading Wrapper
+        /// </summary>
+        /// <param name="downloadRequest"></param>
+        /// <returns></returns>
+        public NetworkManager Download(Core.Networking.AssetBundleRequest downloadRequest)
+        {
+            downloadRequest.SendRequest();
+            return _instance;
+        }
+        
+        /// <summary>
+        /// Downloading Wrapper
+        /// </summary>
+        /// <param name="downloadRequest"></param>
+        /// <returns></returns>
+        public NetworkManager Download(AudioClipRequest downloadRequest)
+        {
+            downloadRequest.SendRequest();
+            return _instance;
+        }
+        
+        /// <summary>
+        /// Downloading Wrapper
+        /// </summary>
+        /// <param name="downloadRequest"></param>
+        /// <returns></returns>
+        public NetworkManager Download(Texture2DRequest downloadRequest)
+        {
+            downloadRequest.SendRequest();
+            return _instance;
+        }
+        
+        /// <summary>
+        /// Downloading Wrapper
+        /// </summary>
+        /// <param name="downloadRequest"></param>
+        /// <returns></returns>
+        public NetworkManager Download(SpriteRequest downloadRequest)
+        {
+            downloadRequest.SendRequest();
+            return _instance;
+        }
+        
+        /// <summary>
+        /// Downloading Wrapper
+        /// </summary>
+        /// <param name="downloadRequest"></param>
+        /// <returns></returns>
+        public NetworkManager Download(INetRequest downloadRequest)
+        {
+            downloadRequest.SendRequest();
+            return _instance;
         }
         #endregion
     }

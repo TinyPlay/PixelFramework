@@ -20,6 +20,7 @@ namespace PixelFramework.Core.Networking
 {
     using System;
     using System.Text;
+    using System.IO;
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
@@ -29,21 +30,21 @@ namespace PixelFramework.Core.Networking
     using PixelFramework.Core.ContentManagement;
     
     /// <summary>
-    /// Texture2D Request Class
+    /// Audio Clip Request
     /// </summary>
-    public class Texture2DRequest : INetRequest
+    public class AudioClipRequest : INetRequest
     {
         // Private Params
-        private Texture2DRequestConfig _config;
+        private AudioClipRequestConfig _config;
         
         // Private Events
         private Action _onRequestDispose;
         
         /// <summary>
-        /// Texture2D Request Constructor
+        /// AudioClip Request Constructor
         /// </summary>
         /// <param name="requestData"></param>
-        public Texture2DRequest(Texture2DRequestConfig requestData)
+        public AudioClipRequest(AudioClipRequestConfig requestData)
         {
             _config = requestData;
         }
@@ -77,7 +78,7 @@ namespace PixelFramework.Core.Networking
             // Load Request Cache
             if (_config.CacheRequest)
             {
-                Texture2D requestCache = GetRequestCache(_config.Url);
+                AudioClip requestCache = GetRequestCache(_config.Url);
                 if (requestCache != null)
                 {
                     if (_config.OnComplete != null) 
@@ -90,25 +91,25 @@ namespace PixelFramework.Core.Networking
             }
             
             // Detect Method
-            UnityWebRequest textureRequest = UnityWebRequestTexture.GetTexture(_config.Url);
+            UnityWebRequest multimedia = UnityWebRequestMultimedia.GetAudioClip(_config.Url, _config.AudioType);
 
             // Send Request
-            yield return textureRequest.SendWebRequest();
-            if (textureRequest.result == UnityWebRequest.Result.Success)
+            yield return multimedia.SendWebRequest();
+            if (multimedia.result == UnityWebRequest.Result.Success)
             {
                 if (_config.OnComplete != null) 
-                    _config.OnComplete.Invoke(DownloadHandlerTexture.GetContent(textureRequest));
-                if (_config.CacheRequest) SaveRequestCache(_config.Url, textureRequest.downloadHandler.data);
+                    _config.OnComplete.Invoke(DownloadHandlerAudioClip.GetContent(multimedia));
+                if (_config.CacheRequest) SaveRequestCache(_config.Url, multimedia.downloadHandler.data);
             }
             else
             {
-                if (_config.OnError != null) _config.OnError(textureRequest.error);
+                if (_config.OnError != null) _config.OnError(multimedia.error);
             }
             
             
             if(_onRequestDispose!=null) 
                 _onRequestDispose.Invoke();
-            textureRequest.Dispose();
+            multimedia.Dispose();
         }
         
         /// <summary>
@@ -116,7 +117,7 @@ namespace PixelFramework.Core.Networking
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        private Texture2D GetRequestCache(string url)
+        private AudioClip GetRequestCache(string url)
         {
             string cacheFilePath = $"{Application.persistentDataPath}/{Base64.Encode(url)}.contentcache";
             string cacheStampPath = $"{Application.persistentDataPath}/{Base64.Encode(url)}.contentcachestamp";
@@ -137,15 +138,20 @@ namespace PixelFramework.Core.Networking
                     return null;
                 }
 
-                Texture2D texture = null;
-                texture = new Texture2D(1, 1);
-                texture.LoadImage(cacheFile, true);
-                return texture;
+                AudioClip audioClip = null;
+                using (Stream s = new MemoryStream(cacheFile))
+                {
+                    audioClip = AudioClip.Create(url, cacheFile.Length, 1, 48000, false);
+                    float[] f = ConvertByteToFloat(cacheFile);
+                    audioClip.SetData(f, 0);
+                }
+                audioClip.LoadAudioData();
+                return audioClip;
             }
 
             return null;
         }
-
+        
         /// <summary>
         /// Save Request Cache
         /// </summary>
@@ -168,6 +174,25 @@ namespace PixelFramework.Core.Networking
         {
             _onRequestDispose = onDispose;
             return this;
+        }
+        
+        /// <summary>
+        /// Convert Byte to Float
+        /// </summary>
+        /// <param name="array"></param>
+        /// <returns></returns>
+        private float[] ConvertByteToFloat(byte[] array)
+        {
+            float[] floatArr = new float[array.Length / 4];
+            for (int i = 0; i < floatArr.Length; i++)
+            {
+                if (BitConverter.IsLittleEndian)
+                {
+                    Array.Reverse(array, i * 4, 4);
+                }
+                floatArr[i] = BitConverter.ToSingle(array, i * 4) / 0x80000000;
+            }
+            return floatArr;
         }
     }
 }

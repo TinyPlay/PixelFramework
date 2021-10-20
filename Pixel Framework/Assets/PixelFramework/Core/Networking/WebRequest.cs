@@ -85,6 +85,8 @@ namespace PixelFramework.Core.Networking
                     if(_onRequestDispose!=null) 
                         _onRequestDispose.Invoke();
                 }
+                
+                yield return null;
             }
             
             // Detect Method
