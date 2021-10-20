@@ -19,37 +19,22 @@
 namespace PixelFramework.Core.Networking
 {
     using System;
+    using UnityEngine;
     using UnityEngine.Networking;
-    using System.Collections.Generic;
-    
+
     /// <summary>
-    /// Web Request Config
+    /// Sprite Request Config
     /// </summary>
     [System.Serializable]
-    public class WebRequestConfig
+    public class SpriteRequestConfig
     {
         // Web Requests Config
         public string Url = "";
-        public WebRequestType RequestType = WebRequestType.GET;
-        public Dictionary<string, string> RequestData = new Dictionary<string, string>();
-        public Dictionary<string, string> RequestHeaders = new Dictionary<string, string>();
         public bool CacheRequest = true;
         public int CacheLifetime = 300;
         
         // Web Request Callbacks
-        public Action<string> OnComplete;
+        public Action<Sprite> OnComplete;
         public Action<string> OnError;
-    }
-
-    /// <summary>
-    /// Web Request Type
-    /// </summary>
-    public enum WebRequestType
-    {
-        GET,
-        POST,
-        PUT,
-        DELETE,
-        HEAD
     }
 }
