@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02a364304553d4fe797810bd5c88f9d8, type: 3}
-  m_Name: Samsung Android Provider Settings
+  m_Script: {fileID: 11500000, guid: b592865877cb54284a5d1d88aec9cfbb, type: 3}
+  m_Name: Simulator Provider Settings
   m_EditorClassIdentifier: 
-  m_Logging: 0
+  m_Logging: 1
   m_AutomaticPerformanceModeEnabled: 1
   m_StatsLoggingFrequencyInFrames: 50
   m_IndexerSettings:
@@ -149,7 +149,7 @@ MonoBehaviour:
       m_MaxBound: 60
     m_AdaptiveResolution:
       m_Name: Adaptive Resolution
-      m_Enabled: 1
+      m_Enabled: 0
       m_Scale: 1
       m_VisualImpact: 0
       m_Target: 6
@@ -258,6 +258,3 @@ MonoBehaviour:
     m_Name: Default Scaler Profile
   m_DefaultScalerProfilerIndex: 0
   k_AssetVersion: 2
-  m_SamsungProviderLogging: 0
-  m_HighSpeedVRR: 0
-  m_AutomaticVRR: 1
