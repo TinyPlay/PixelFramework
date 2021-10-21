@@ -87,8 +87,8 @@ namespace PixelFramework.Managers
         /// </summary>
         public void LoadState()
         {
-            string path = "/game_state.dat";
-            _config = FileReader.ReadObjectFromFile<AnalyticsManagerConfigs>(path, SerializationType.JSON);
+            string path = "/analytics_settings.dat";
+            _config = FileReader.ReadObjectFromFile<AnalyticsManagerConfigs>(path, SerializationType.EncryptedJSON);
         }
 
         /// <summary>
@@ -96,8 +96,8 @@ namespace PixelFramework.Managers
         /// </summary>
         public void SaveState()
         {
-            string path = "/game_state.dat";
-            FileReader.SaveObjectToFile(path, _config, SerializationType.JSON);
+            string path = "/analytics_settings.dat";
+            FileReader.SaveObjectToFile(path, _config, SerializationType.EncryptedJSON);
             if(OnAnalyticsSettingsChanged!=null) OnAnalyticsSettingsChanged.Invoke(_config);
         }
         #endregion

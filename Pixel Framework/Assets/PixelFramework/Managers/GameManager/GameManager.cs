@@ -87,7 +87,7 @@ namespace PixelFramework.Managers
         public void LoadState()
         {
             string path = "/game_state.dat";
-            _config = FileReader.ReadObjectFromFile<BaseGameState>(path, SerializationType.JSON);
+            _config = FileReader.ReadObjectFromFile<BaseGameState>(path, SerializationType.EncryptedJSON);
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace PixelFramework.Managers
         public void SaveState()
         {
             string path = "/game_state.dat";
-            FileReader.SaveObjectToFile(path, _config, SerializationType.JSON);
+            FileReader.SaveObjectToFile(path, _config, SerializationType.EncryptedJSON);
             if(OnGameStateChanged!=null) OnGameStateChanged.Invoke(_config);
         }
         #endregion
