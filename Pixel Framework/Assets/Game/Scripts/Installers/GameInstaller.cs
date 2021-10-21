@@ -36,9 +36,22 @@ namespace HyperSample.Installers
             AudioManager.Instance(new AudioManagerConfigs()).LoadState();
             NetworkManager.Instance(new NetworkManagerConfigs()).LoadState();
             GraphicsManager.Instance(new GraphicsManagerConfigs()).LoadState();
-            IAPManager.Instance(new IAPManagerConfigs()).LoadState();
             
+            // Additional Managers
+            IAPManager.Instance(new IAPManagerConfigs()
+            {
+                
+            });
+            AdsManager.Instance(new AdsManagerConfigs()
+            {
+
+            });
+            AnalyticsManager.Instance(new AnalyticsManagerConfigs()
+            {
+                
+            });
             
+            // Initialize Game Manager
             GameManager.Instance(new GameStateModel()).LoadState();
         }
     }
