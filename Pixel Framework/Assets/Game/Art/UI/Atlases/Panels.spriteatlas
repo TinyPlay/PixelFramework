@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Panels
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 1
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: db40709cf6ab96d469990f90d6610b64, type: 3}
+    - {fileID: 2800000, guid: c13bca0af82ada642a94fe706eb7c4bc, type: 3}
+    - {fileID: 2800000, guid: 506373d8b465c3540ad4ac4c9bfcd1fa, type: 3}
+    - {fileID: 2800000, guid: 3ef695d9c2c9cd248a96dd3b0e961a9d, type: 3}
+    - {fileID: 2800000, guid: ecfc1c2b1415a054baa9cc1be3d104b5, type: 3}
+    - {fileID: 2800000, guid: e803d9b176ade39408c3a861bb76dafc, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: e803d9b176ade39408c3a861bb76dafc, type: 3}
+  - {fileID: 21300000, guid: 506373d8b465c3540ad4ac4c9bfcd1fa, type: 3}
+  - {fileID: 21300000, guid: 3ef695d9c2c9cd248a96dd3b0e961a9d, type: 3}
+  - {fileID: 21300000, guid: c13bca0af82ada642a94fe706eb7c4bc, type: 3}
+  - {fileID: 21300000, guid: ecfc1c2b1415a054baa9cc1be3d104b5, type: 3}
+  - {fileID: 21300000, guid: db40709cf6ab96d469990f90d6610b64, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - up2
+  - table_1
+  - table_2
+  - table
+  - up
+  - down
+  m_RenderDataMap: {}
+  m_Tag: Panels
+  m_IsVariant: 0

@@ -15,8 +15,12 @@
  * @support         https://github.com/TinyPlay/PixelFramework/issues
  * @discord         https://discord.gg/wE67T7Vm
  */
+
+using UnityEngine.Purchasing;
+
 namespace HyperSample.Installers
 {
+    using System.Collections.Generic;
     using UnityEngine;
     using PixelFramework.Managers;
     using HyperSample.Models;
@@ -37,18 +41,59 @@ namespace HyperSample.Installers
             NetworkManager.Instance(new NetworkManagerConfigs()).LoadState();
             GraphicsManager.Instance(new GraphicsManagerConfigs()).LoadState();
             
-            // Additional Managers
+            // Add IAP Manager
+            List<IAPProduct> products = new List<IAPProduct>();
+            products.Add(new IAPProduct()
+            {
+                productID = "noads",
+                productIDList = new IDs()
+                {
+                    {"noads", GooglePlay.Name},
+                    {"noads", AppleAppStore.Name}
+                }
+            });
             IAPManager.Instance(new IAPManagerConfigs()
             {
-                
+                Products = products,
+                PaymentVerification = true
             });
+            
+            // Add Ads Manager
             AdsManager.Instance(new AdsManagerConfigs()
             {
-
+                OnAdsInitialized = () =>
+                {
+                    /* TODO: Initialize Ads */
+                },
+                OnAdsShown = adsType =>
+                {
+                    /* TODO: Show Ads */
+                }
             });
+            
+            // Add Analytics Manager
             AnalyticsManager.Instance(new AnalyticsManagerConfigs()
             {
-                
+                OnAnalyticsInitialize = () =>
+                {
+                    /* TODO: Initialize Analytics */
+                },
+                OnEventSended = eventName =>
+                {
+                    /* TODO: Send Event */
+                },
+                OnObjectEventSended = (eventName, eventObject) =>
+                {
+                    /* TODO: Send Event with Object Data */
+                },
+                OnRevenueSended = (productID, price, currency) =>
+                {
+                    /* TODO: Send Revenue Data */
+                },
+                OnStringEventSended = (eventName, eventData) =>
+                {
+                    /* TODO: Send Event with String Data */
+                }
             });
             
             // Initialize Game Manager

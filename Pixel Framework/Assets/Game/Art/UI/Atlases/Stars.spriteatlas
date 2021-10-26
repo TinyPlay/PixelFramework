@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Stars
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 512
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 1
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: a326e7fe7fd9c654283f2066b1b8c29a, type: 3}
+    - {fileID: 2800000, guid: ffe3beb2e4ad9d5478211d69d96f04ea, type: 3}
+    - {fileID: 2800000, guid: 89c72ee6ae8291f448766cc5b37587b8, type: 3}
+    - {fileID: 2800000, guid: ace7c5399e70ce14e8b1098f24f0dc06, type: 3}
+    - {fileID: 2800000, guid: cc5c9594fb1a6d843b241eba4677b015, type: 3}
+    - {fileID: 2800000, guid: f21d4af0f34e1814b846e74ee9ecf9f7, type: 3}
+    - {fileID: 2800000, guid: 5ac8ae75e6b958b4c962da2453f658cc, type: 3}
+    - {fileID: 2800000, guid: 0c1a2b92f7b5c184e866c0437ffd3e5a, type: 3}
+    - {fileID: 2800000, guid: b36540b5f46f1ba49bfb03609eb0d37f, type: 3}
+    - {fileID: 2800000, guid: e86a8de2205c0134098be3ead9055187, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: f21d4af0f34e1814b846e74ee9ecf9f7, type: 3}
+  - {fileID: 21300000, guid: 0c1a2b92f7b5c184e866c0437ffd3e5a, type: 3}
+  - {fileID: 21300000, guid: ffe3beb2e4ad9d5478211d69d96f04ea, type: 3}
+  - {fileID: 21300000, guid: e86a8de2205c0134098be3ead9055187, type: 3}
+  - {fileID: 21300000, guid: cc5c9594fb1a6d843b241eba4677b015, type: 3}
+  - {fileID: 21300000, guid: 5ac8ae75e6b958b4c962da2453f658cc, type: 3}
+  - {fileID: 21300000, guid: b36540b5f46f1ba49bfb03609eb0d37f, type: 3}
+  - {fileID: 21300000, guid: 89c72ee6ae8291f448766cc5b37587b8, type: 3}
+  - {fileID: 21300000, guid: ace7c5399e70ce14e8b1098f24f0dc06, type: 3}
+  - {fileID: 21300000, guid: a326e7fe7fd9c654283f2066b1b8c29a, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - star_2
+  - star_1
+  - star_2
+  - star_3
+  - star_1
+  - star_3
+  - star_2
+  - star_3
+  - star_4
+  - star_1
+  m_RenderDataMap: {}
+  m_Tag: Stars
+  m_IsVariant: 0
