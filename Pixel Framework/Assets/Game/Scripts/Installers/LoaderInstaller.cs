@@ -18,21 +18,38 @@
 namespace HyperSample.Installers
 {
     using UnityEngine;
+    using UnityEngine.Events;
     using PixelFramework.Managers;
     using HyperSample.Models;
+    using HyperSample.UI.Views;
     
     /// <summary>
     /// Loader Installer Class
     /// </summary>
     internal class LoaderInstaller : MonoBehaviour
     {
+        [Header("General References")] 
+        [SerializeField] private Transform ViewContainer;
+        
+        [Header("View References")] 
+        [SerializeField] private GameObject PreloaderViewPrefab;
+        
         /// <summary>
         /// On Start
         /// </summary>
         private void Start()
         {
+            // Initialize Events
+            UnityEvent<float, string> LoadingProgressEvent = new UnityEvent<float, string>();
+
             // Initialize Controllers
-            
+            PreloaderPm loaderPm = new PreloaderPm();
+            loaderPm.SetContext(new PreloaderPm.Context()
+            {
+                PreloaderEvent = LoadingProgressEvent,
+                ViewParent = ViewContainer,
+                ViewPrefab = PreloaderViewPrefab
+            });
         }
     }
 }
