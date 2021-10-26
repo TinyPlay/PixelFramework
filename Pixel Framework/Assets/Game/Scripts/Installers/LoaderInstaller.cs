@@ -71,6 +71,8 @@ namespace HyperSample.Installers
                 OnPrivacyAccepted = () =>
                 {
                     LoadingProgressEvent.Invoke(0, LocaleManager.Instance().GetItem("loading_state_1"));
+                    state.IsPrivacyAccepted = true;
+                    GameManager.Instance().SaveState();
                     LoadMenuScene();
                 },
                 OnPrivacyDelinced = () =>
