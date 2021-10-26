@@ -33,6 +33,9 @@ namespace HyperSample.Installers
         
         [Header("View References")] 
         [SerializeField] private GameObject PreloaderViewPrefab;
+        [SerializeField] private GameObject PrivacyViewPrefab;
+        [SerializeField] private GameObject TransitionViewPrefab;
+        [SerializeField] private GameObject LazyLoadViewPrefab;
         
         /// <summary>
         /// On Start
@@ -42,7 +45,7 @@ namespace HyperSample.Installers
             // Initialize Events
             UnityEvent<float, string> LoadingProgressEvent = new UnityEvent<float, string>();
 
-            // Initialize Controllers
+            // Initialize Preloader
             PreloaderPm loaderPm = new PreloaderPm();
             loaderPm.SetContext(new PreloaderPm.Context()
             {
@@ -50,6 +53,11 @@ namespace HyperSample.Installers
                 ViewParent = ViewContainer,
                 ViewPrefab = PreloaderViewPrefab
             });
+            
+            // Initialize Privacy
+            
+            // Initialize Transition
+            
         }
     }
 }
