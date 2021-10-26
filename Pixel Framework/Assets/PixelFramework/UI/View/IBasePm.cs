@@ -18,55 +18,24 @@
  */
 namespace PixelFramework.UI.View
 {
-    using System;
-    
     /// <summary>
-    /// Base View Interface
+    /// Base Controller Interface
     /// </summary>
-    public interface IBaseView
+    public interface IBasePm
     {
         /// <summary>
-        /// Setup View Context
+        /// Setup Pm Context
         /// </summary>
         /// <param name="ctx"></param>
         /// <returns></returns>
-        public IBaseView SetContext(IViewContext ctx);
-
+        public IBasePm SetContext(IPmContext ctx);
+        
         /// <summary>
         /// Get Context
         /// </summary>
         /// <returns></returns>
-        public IViewContext GetContext();
+        public IPmContext GetContext();
         
-        /// <summary>
-        /// Show View
-        /// </summary>
-        /// <param name="animationOptions"></param>
-        /// <param name="onComplete"></param>
-        public IBaseView ShowView(ViewAnimationOptions animationOptions = null, Action onComplete = null);
-
-        /// <summary>
-        /// Hide View
-        /// </summary>
-        /// <param name="animationOptions"></param>
-        /// <param name="onComplete"></param>
-        public IBaseView HideView(ViewAnimationOptions animationOptions = null, Action onComplete = null);
-
-        /// <summary>
-        /// Update View
-        /// </summary>
-        public IBaseView UpdateView();
-
-        /// <summary>
-        /// On View Initialized
-        /// </summary>
-        public void OnViewInitialized();
-
-        /// <summary>
-        /// On View Destroyed
-        /// </summary>
-        public void OnViewDestroyed();
-
         /// <summary>
         /// On Context Initialized
         /// </summary>

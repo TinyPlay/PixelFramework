@@ -46,6 +46,7 @@ namespace PixelFramework.UI.View
         public IBaseView SetContext(IViewContext ctx)
         {
             _ctx = ctx;
+            OnContextInitialized();
             return this;
         }
 
@@ -56,6 +57,13 @@ namespace PixelFramework.UI.View
         public IViewContext GetContext()
         {
             return _ctx;
+        }
+
+        /// <summary>
+        /// On Context Initialized
+        /// </summary>
+        public virtual void OnContextInitialized()
+        {
         }
         #endregion
 
