@@ -58,9 +58,12 @@ namespace HyperSample.UI.Views
                 {
                     IsAnimated = true,
                     AnimationDelay = 0,
-                    AnimationLength = 1f,
+                    AnimationLength = 2f,
                     AnimationType = ViewAnimationType.Fade
-                }, ctx.OnShown.Invoke);
+                }, () =>
+                {
+                    ctx.OnShown.Invoke();
+                });
             });
             ctx.HideEvent.AddListener(() =>
             {
@@ -68,9 +71,12 @@ namespace HyperSample.UI.Views
                 {
                     IsAnimated = true,
                     AnimationDelay = 0,
-                    AnimationLength = 1f,
+                    AnimationLength = 2f,
                     AnimationType = ViewAnimationType.Fade
-                }, ctx.OnHidden.Invoke);
+                }, () =>
+                {
+                    ctx.OnHidden.Invoke();
+                });
             });
         }
     }

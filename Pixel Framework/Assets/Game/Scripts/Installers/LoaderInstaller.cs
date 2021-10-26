@@ -19,9 +19,11 @@ namespace HyperSample.Installers
 {
     using UnityEngine;
     using UnityEngine.Events;
+    using UnityEngine.Audio;
     using PixelFramework.Managers;
     using HyperSample.Models;
     using HyperSample.UI.Views;
+    using DG.Tweening;
     
     /// <summary>
     /// Loader Installer Class
@@ -30,26 +32,32 @@ namespace HyperSample.Installers
     {
         [Header("General References")] 
         [SerializeField] private Transform ViewContainer;
+        [SerializeField] private AudioMixer MainMixer;
         
         [Header("View References")] 
         [SerializeField] private GameObject PreloaderViewPrefab;
         [SerializeField] private GameObject PrivacyViewPrefab;
         [SerializeField] private GameObject TransitionViewPrefab;
+        
+        // Events
+        private UnityEvent<float, string> LoadingProgressEvent = new UnityEvent<float, string>();
+            
+        private UnityEvent ShowLoaderEvent = new UnityEvent();
+        private UnityEvent ShowPrivacyEvent = new UnityEvent();
+        private UnityEvent ShowTransitionEvent = new UnityEvent();
+        private UnityEvent CompleteLoadingEvent = new UnityEvent();
 
         /// <summary>
         /// On Start
         /// </summary>
         private void Start()
         {
-            // Initialize Events
-            UnityEvent<float, string> LoadingProgressEvent = new UnityEvent<float, string>();
-            
-            UnityEvent ShowLoaderEvent = new UnityEvent();
-            UnityEvent ShowPrivacyEvent = new UnityEvent();
-            UnityEvent ShowTransitionEvent = new UnityEvent();
-            
             // Initialize Data
             GameStateModel state = (GameStateModel) GameManager.Instance().GetCurrentState();
+            
+            // Initialize Audio
+            MainMixer.SetFloat("MainGroup", -80f);
+            MainMixer.DOSetFloat("MainGroup", 0f, 2f);
 
             // Initialize Preloader
             PreloaderPm loaderPm = new PreloaderPm();
@@ -89,7 +97,8 @@ namespace HyperSample.Installers
                 ViewParent = ViewContainer,
                 ViewPrefab = TransitionViewPrefab,
                 
-                ShowEvent = ShowTransitionEvent
+                ShowEvent = ShowTransitionEvent,
+                OnShown = CompleteLoadingEvent
             });
 
             // Initialize Logic
@@ -111,7 +120,21 @@ namespace HyperSample.Installers
         /// </summary>
         private void LoadMenuScene()
         {
-            
+            GameManager.Instance().LoadScene("MenuScene", progress =>
+            {
+                LoadingProgressEvent.Invoke(progress, LocaleManager.Instance().GetItem("loading_state_1"));
+            }, operation =>
+            {
+                MainMixer.SetFloat("MainGroup", 0f);
+                MainMixer.DOSetFloat("MainGroup", -80f, 2f);
+                
+                LoadingProgressEvent.Invoke(1f, LocaleManager.Instance().GetItem("loading_state_1"));
+                CompleteLoadingEvent.AddListener(() =>
+                {
+                    operation.allowSceneActivation = true;
+                });
+                ShowTransitionEvent.Invoke();
+            });
         }
     }
 }
