@@ -36,7 +36,10 @@ namespace HyperSample.Installers
         private void Start()
         {
             // Initialize Managers
-            LocaleManager.Instance(new LocaleManagerConfigs()).LoadState();
+            LocaleManager.Instance(new LocaleManagerConfigs()
+            {
+                LocaleCode = "EN"
+            }).LoadState();
             AudioManager.Instance(new AudioManagerConfigs()).LoadState();
             NetworkManager.Instance(new NetworkManagerConfigs()).LoadState();
             GraphicsManager.Instance(new GraphicsManagerConfigs()).LoadState();
@@ -98,6 +101,7 @@ namespace HyperSample.Installers
             
             // Initialize Game Manager
             GameManager.Instance(new GameStateModel()).LoadState();
+            Debug.Log(GameManager.Instance().GetCurrentState());
         }
     }
 }

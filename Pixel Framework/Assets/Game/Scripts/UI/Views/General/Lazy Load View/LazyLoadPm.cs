@@ -26,6 +26,49 @@ namespace HyperSample.UI.Views
     /// </summary>
     public class LazyLoadPm : BasePm
     {
-        
+        [System.Serializable]
+        public class Context : IPmContext
+        {
+            public UnityEvent ShowEvent = new UnityEvent();
+            public UnityEvent HideEvent = new UnityEvent();
+            
+            public Transform ViewParent;
+            public GameObject ViewPrefab;
+        }
+
+        /// <summary>
+        /// On Context Initialized
+        /// </summary>
+        public override void OnContextInitialized()
+        {
+            Context ctx = (Context) GetContext();
+            
+            // Initialize View
+            GameObject viewPrefab = GameObject.Instantiate(ctx.ViewPrefab, ctx.ViewParent);
+            LazyLoadView view = viewPrefab.GetComponent<LazyLoadView>();
+            view.SetContext(new LazyLoadView.Context());
+            
+            // Work with Events
+            ctx.ShowEvent.AddListener(() =>
+            {
+                view.ShowView(new ViewAnimationOptions()
+                {
+                    IsAnimated = true,
+                    AnimationDelay = 0,
+                    AnimationLength = 0.5f,
+                    AnimationType = ViewAnimationType.Fade
+                });
+            });
+            ctx.HideEvent.AddListener(() =>
+            {
+                view.HideView(new ViewAnimationOptions()
+                {
+                    IsAnimated = true,
+                    AnimationDelay = 0,
+                    AnimationLength = 0.5f,
+                    AnimationType = ViewAnimationType.Fade
+                });
+            });
+        }
     }
 }

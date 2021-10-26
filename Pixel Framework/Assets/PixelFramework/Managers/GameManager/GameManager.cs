@@ -33,19 +33,19 @@ namespace PixelFramework.Managers
     public class GameManager : IGameManager
     {
         // Game Manager Events
-        public UnityEvent<BaseGameState> OnGameStateChanged = new UnityEvent<BaseGameState>();
+        public UnityEvent<IGameState> OnGameStateChanged = new UnityEvent<IGameState>();
         public UnityEvent<bool> OnGamePaused = new UnityEvent<bool>();
 
         // Private Params
         private static GameManager _instance;
-        private BaseGameState _config = new BaseGameState();
+        private IGameState _config;
 
         #region Base Manager Logic
         /// <summary>
         /// Game Manager Constructor
         /// </summary>
         /// <param name="config"></param>
-        private GameManager(BaseGameState config = null)
+        private GameManager(IGameState config = null)
         {
             if (config != null) _config = config;
         }
@@ -55,7 +55,7 @@ namespace PixelFramework.Managers
         /// </summary>
         /// <param name="config"></param>
         /// <returns></returns>
-        public static GameManager Instance(BaseGameState config = null)
+        public static GameManager Instance(IGameState config = null)
         {
             if (_instance == null)
                 _instance = new GameManager(config);
@@ -66,7 +66,7 @@ namespace PixelFramework.Managers
         /// Set Current Game Manager State
         /// </summary>
         /// <param name="config"></param>
-        public GameManager SetState(BaseGameState config)
+        public GameManager SetState(IGameState config)
         {
             _config = config;
             return _instance;
@@ -76,7 +76,7 @@ namespace PixelFramework.Managers
         /// Get Current Game Manager State
         /// </summary>
         /// <returns></returns>
-        public BaseGameState GetCurrentState()
+        public IGameState GetCurrentState()
         {
             return _config;
         }
@@ -87,7 +87,7 @@ namespace PixelFramework.Managers
         public void LoadState()
         {
             string path = "/game_state.dat";
-            _config = FileReader.ReadObjectFromFile<BaseGameState>(path, SerializationType.EncryptedJSON);
+            FileReader.ReadObjectFromFile(_config, path, SerializationType.EncryptedJSON);
         }
 
         /// <summary>

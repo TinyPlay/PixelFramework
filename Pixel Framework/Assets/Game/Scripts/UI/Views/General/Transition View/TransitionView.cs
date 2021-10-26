@@ -32,11 +32,6 @@ namespace HyperSample.UI.Views
         [System.Serializable]
         public class Context : IViewContext
         {
-            // Events
-            public UnityEvent OnTransitionShown = new UnityEvent();
-            public UnityEvent OnTransitionComplete = new UnityEvent();
         }
-        
-        
     }
 }

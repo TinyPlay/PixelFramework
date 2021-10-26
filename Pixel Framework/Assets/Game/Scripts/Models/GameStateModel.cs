@@ -22,7 +22,7 @@ namespace HyperSample.Models
     using PixelFramework.Managers;
 
     [System.Serializable]
-    public class GameStateModel : BaseGameState
+    public class GameStateModel : IGameState
     {
         // Base Game Params
         public bool IsPrivacyAccepted = false;

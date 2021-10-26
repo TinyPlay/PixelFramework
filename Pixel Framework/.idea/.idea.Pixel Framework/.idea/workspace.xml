@@ -10,6 +10,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JSON File" />
+      </list>
+    </option>
+  </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/UI/Views/General/Lazy Load View/LazyLoadPm.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -60,7 +67,7 @@
       <option name="presentableId" value="Default" />
       <updated>1634721034710</updated>
       <workItem from="1634721042170" duration="29583000" />
-      <workItem from="1635242943511" duration="8535000" />
+      <workItem from="1635242943511" duration="12828000" />
     </task>
     <servers />
   </component>

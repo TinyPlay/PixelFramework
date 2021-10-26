@@ -28,6 +28,36 @@ namespace HyperSample.Installers
     /// </summary>
     internal class GameLevelInstaller : MonoBehaviour
     {
+        [Header("General References")] 
+        [SerializeField] private Transform ViewContainer;
         
+        [Header("View References")] 
+        [SerializeField] private GameObject PreloaderViewPrefab;
+        [SerializeField] private GameObject PrivacyViewPrefab;
+        [SerializeField] private GameObject TransitionViewPrefab;
+        [SerializeField] private GameObject LazyLoadViewPrefab;
+        
+        /// <summary>
+        /// On Start
+        /// </summary>
+        private void Start()
+        {
+            // Initialize Events
+            UnityEvent<float, string> LoadingProgressEvent = new UnityEvent<float, string>();
+
+            // Initialize Preloader
+            PreloaderPm loaderPm = new PreloaderPm();
+            loaderPm.SetContext(new PreloaderPm.Context()
+            {
+                PreloaderEvent = LoadingProgressEvent,
+                ViewParent = ViewContainer,
+                ViewPrefab = PreloaderViewPrefab
+            });
+            
+            // Initialize Privacy
+            
+            // Initialize Transition
+            
+        }
     }
 }

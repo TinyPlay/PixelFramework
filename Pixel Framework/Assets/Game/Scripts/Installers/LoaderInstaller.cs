@@ -35,8 +35,7 @@ namespace HyperSample.Installers
         [SerializeField] private GameObject PreloaderViewPrefab;
         [SerializeField] private GameObject PrivacyViewPrefab;
         [SerializeField] private GameObject TransitionViewPrefab;
-        [SerializeField] private GameObject LazyLoadViewPrefab;
-        
+
         /// <summary>
         /// On Start
         /// </summary>
@@ -44,6 +43,13 @@ namespace HyperSample.Installers
         {
             // Initialize Events
             UnityEvent<float, string> LoadingProgressEvent = new UnityEvent<float, string>();
+            
+            UnityEvent ShowLoaderEvent = new UnityEvent();
+            UnityEvent ShowPrivacyEvent = new UnityEvent();
+            UnityEvent ShowTransitionEvent = new UnityEvent();
+            
+            // Initialize Data
+            GameStateModel state = (GameStateModel) GameManager.Instance().GetCurrentState();
 
             // Initialize Preloader
             PreloaderPm loaderPm = new PreloaderPm();
@@ -51,12 +57,58 @@ namespace HyperSample.Installers
             {
                 PreloaderEvent = LoadingProgressEvent,
                 ViewParent = ViewContainer,
-                ViewPrefab = PreloaderViewPrefab
+                ViewPrefab = PreloaderViewPrefab,
+                ShowEvent = ShowLoaderEvent
             });
             
             // Initialize Privacy
+            PrivacyPm privacyPm = new PrivacyPm();
+            privacyPm.SetContext(new PrivacyPm.Context()
+            {
+                ViewParent = ViewContainer,
+                ViewPrefab = PrivacyViewPrefab,
+                
+                OnPrivacyAccepted = () =>
+                {
+                    LoadingProgressEvent.Invoke(0, LocaleManager.Instance().GetItem("loading_state_1"));
+                    LoadMenuScene();
+                },
+                OnPrivacyDelinced = () =>
+                {
+                    Application.Quit();
+                },
+                PrivacyShowEvent = ShowPrivacyEvent
+            });
             
             // Initialize Transition
+            TransitionPm transitionPm = new TransitionPm();
+            transitionPm.SetContext(new TransitionPm.Context()
+            {
+                ViewParent = ViewContainer,
+                ViewPrefab = TransitionViewPrefab,
+                
+                ShowEvent = ShowTransitionEvent
+            });
+
+            // Initialize Logic
+            LoadingProgressEvent.Invoke(0, LocaleManager.Instance().GetItem("loading_state_0"));
+            ShowLoaderEvent.Invoke();
+            if (state.IsPrivacyAccepted)
+            {
+                LoadingProgressEvent.Invoke(0, LocaleManager.Instance().GetItem("loading_state_1"));
+                LoadMenuScene();
+            }
+            else
+            {
+                ShowPrivacyEvent.Invoke();
+            }
+        }
+
+        /// <summary>
+        /// Load Menu Scene
+        /// </summary>
+        private void LoadMenuScene()
+        {
             
         }
     }

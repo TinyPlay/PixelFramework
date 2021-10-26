@@ -19,10 +19,9 @@
 namespace PixelFramework.Managers
 {
     /// <summary>
-    /// Base Game State Class
+    /// Game State Interface
     /// </summary>
-    [System.Serializable]
-    public class BaseGameState : IGameState
+    public interface IGameState
     {
     }
 }

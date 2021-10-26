@@ -17,6 +17,7 @@
  */
 namespace HyperSample.UI.Views
 {
+    using System;
     using UnityEngine;
     using UnityEngine.UI;
     using UnityEngine.Events;
@@ -34,8 +35,8 @@ namespace HyperSample.UI.Views
         {
             // Events
             public UnityEvent OnPrivacyShown = new UnityEvent();
-            public UnityEvent OnPrivacyAccepted = new UnityEvent();
-            public UnityEvent OnPrivacyDelinced = new UnityEvent();
+            public Action OnPrivacyAccepted;
+            public Action OnPrivacyDelinced;
         }
         
         // View References
@@ -67,7 +68,7 @@ namespace HyperSample.UI.Views
             _acceptButton.onClick.AddListener(() =>
             {
                 if(_audioSource.clip!=null) _audioSource.Play();
-                ctx.OnPrivacyAccepted.Invoke();
+                if(ctx.OnPrivacyAccepted!=null) ctx.OnPrivacyAccepted.Invoke();
                 HideView(new ViewAnimationOptions()
                 {
                     AnimationDelay = 0f,
@@ -79,7 +80,7 @@ namespace HyperSample.UI.Views
             _declineButton.onClick.AddListener(() =>
             {
                 if(_audioSource.clip!=null) _audioSource.Play();
-                ctx.OnPrivacyDelinced.Invoke();
+                if(ctx.OnPrivacyDelinced!=null) ctx.OnPrivacyDelinced.Invoke();
             });
             
             // Initialize Events
@@ -102,8 +103,6 @@ namespace HyperSample.UI.Views
         {
             Context ctx = (Context) GetContext();
             ctx.OnPrivacyShown.RemoveAllListeners();
-            ctx.OnPrivacyAccepted.RemoveAllListeners();
-            ctx.OnPrivacyDelinced.RemoveAllListeners();
             
             _acceptButton.onClick.RemoveAllListeners();
             _declineButton.onClick.RemoveAllListeners();

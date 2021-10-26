@@ -28,6 +28,10 @@ namespace HyperSample.UI.Views
     /// </summary>
     internal class LazyLoadView : BaseView
     {
-        
+        // Context
+        [System.Serializable]
+        public class Context : IViewContext
+        {
+        }
     }
 }

@@ -164,6 +164,42 @@ namespace PixelFramework.Core.ContentManagement
 
         #region Read Objects
         /// <summary>
+        /// Read Object from file without type
+        /// </summary>
+        /// <param name="referenceObject"></param>
+        /// <param name="pathToFile"></param>
+        /// <param name="serializationType"></param>
+        /// <returns></returns>
+        public static void ReadObjectFromFile(object referenceObject, string pathToFile,
+            SerializationType serializationType = SerializationType.JSON)
+        {
+            string path = Application.persistentDataPath + pathToFile;
+            if (File.Exists(path))
+            {
+                if (serializationType == SerializationType.JSON || serializationType == SerializationType.EncryptedJSON)
+                {
+                    string serializedData = LoadText(pathToFile, Encoding.UTF8);
+                    if(serializationType == SerializationType.EncryptedJSON) serializedData = AES.Decrypt(serializedData, _encryptionKey);
+                    if (serializedData != null)
+                    {
+                        JsonUtility.FromJsonOverwrite(serializedData, referenceObject);
+                    }
+                }else if (serializationType == SerializationType.Binary ||
+                          serializationType == SerializationType.EncryptedBinary)
+                {
+                    BinaryFormatter converter = new BinaryFormatter();
+                    FileStream inputStream = new FileStream(pathToFile, FileMode.Open);
+                    referenceObject = converter.Deserialize(inputStream);
+                    inputStream.Close();
+                }else if (serializationType == SerializationType.XML)
+                {
+                    throw new Exception(
+                        "Failed to Deserialize Object. XML Deserialization cannot be work with abstract objects");
+                }
+            }
+        }
+        
+        /// <summary>
         /// Read Object from File
         /// </summary>
         /// <param name="pathToFile"></param>

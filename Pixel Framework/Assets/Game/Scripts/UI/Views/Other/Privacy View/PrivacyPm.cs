@@ -17,6 +17,7 @@
  */
 namespace HyperSample.UI.Views
 {
+    using System;
     using UnityEngine;
     using PixelFramework.UI.View;
     using UnityEngine.Events;
@@ -30,8 +31,8 @@ namespace HyperSample.UI.Views
         public class Context : IPmContext
         {
             public UnityEvent PrivacyShowEvent = new UnityEvent();
-            public UnityEvent OnPrivacyAccepted = new UnityEvent();
-            public UnityEvent OnPrivacyDelinced = new UnityEvent();
+            public Action OnPrivacyAccepted;
+            public Action OnPrivacyDelinced;
             
             public Transform ViewParent;
             public GameObject ViewPrefab;

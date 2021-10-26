@@ -26,6 +26,52 @@ namespace HyperSample.UI.Views
     /// </summary>
     public class TransitionPm : BasePm
     {
-        
+        [System.Serializable]
+        public class Context : IPmContext
+        {
+            public UnityEvent ShowEvent = new UnityEvent();
+            public UnityEvent HideEvent = new UnityEvent();
+
+            public UnityEvent OnShown = new UnityEvent();
+            public UnityEvent OnHidden = new UnityEvent();
+            
+            public Transform ViewParent;
+            public GameObject ViewPrefab;
+        }
+
+        /// <summary>
+        /// On Context Initialized
+        /// </summary>
+        public override void OnContextInitialized()
+        {
+            Context ctx = (Context) GetContext();
+            
+            // Initialize View
+            GameObject viewPrefab = GameObject.Instantiate(ctx.ViewPrefab, ctx.ViewParent);
+            TransitionView view = viewPrefab.GetComponent<TransitionView>();
+            view.SetContext(new TransitionView.Context());
+            
+            // Work with Events
+            ctx.ShowEvent.AddListener(() =>
+            {
+                view.ShowView(new ViewAnimationOptions()
+                {
+                    IsAnimated = true,
+                    AnimationDelay = 0,
+                    AnimationLength = 1f,
+                    AnimationType = ViewAnimationType.Fade
+                }, ctx.OnShown.Invoke);
+            });
+            ctx.HideEvent.AddListener(() =>
+            {
+                view.HideView(new ViewAnimationOptions()
+                {
+                    IsAnimated = true,
+                    AnimationDelay = 0,
+                    AnimationLength = 1f,
+                    AnimationType = ViewAnimationType.Fade
+                }, ctx.OnHidden.Invoke);
+            });
+        }
     }
 }

@@ -30,6 +30,10 @@ namespace HyperSample.UI.Views
         public class Context : IPmContext
         {
             public UnityEvent<float, string> PreloaderEvent = new UnityEvent<float, string>();
+            
+            public UnityEvent ShowEvent = new UnityEvent();
+            public UnityEvent HideEvent = new UnityEvent();
+            
             public Transform ViewParent;
             public GameObject ViewPrefab;
         }
@@ -53,12 +57,27 @@ namespace HyperSample.UI.Views
                 DefaultStateText = "Please Wait",
                 OnProgressUpdated = ctx.PreloaderEvent
             });
-            view.ShowView(new ViewAnimationOptions()
+            
+            // Add Handlers
+            ctx.ShowEvent.AddListener(() =>
             {
-                AnimationType = ViewAnimationType.Fade,
-                AnimationDelay = 0,
-                AnimationLength = 0.5f,
-                IsAnimated = true
+                view.ShowView(new ViewAnimationOptions()
+                {
+                    AnimationType = ViewAnimationType.Fade,
+                    AnimationDelay = 0,
+                    AnimationLength = 0.5f,
+                    IsAnimated = true
+                });
+            });
+            ctx.HideEvent.AddListener(() =>
+            {
+                view.HideView(new ViewAnimationOptions()
+                {
+                    AnimationType = ViewAnimationType.Fade,
+                    AnimationDelay = 0,
+                    AnimationLength = 0.5f,
+                    IsAnimated = true
+                });
             });
         }
     }
