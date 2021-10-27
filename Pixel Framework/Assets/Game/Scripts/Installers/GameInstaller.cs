@@ -41,7 +41,7 @@ namespace HyperSample.Installers
             AudioManager.Instance(new AudioManagerConfigs()).LoadState();
             NetworkManager.Instance(new NetworkManagerConfigs()).LoadState();
             GraphicsManager.Instance(new GraphicsManagerConfigs()).LoadState();
-            
+
             // Add IAP Manager
             List<IAPProduct> products = new List<IAPProduct>();
             products.Add(new IAPProduct()

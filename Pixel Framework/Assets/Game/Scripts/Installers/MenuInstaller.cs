@@ -19,9 +19,11 @@ namespace HyperSample.Installers
 {
     using UnityEngine;
     using UnityEngine.Events;
+    using UnityEngine.Audio;
     using PixelFramework.Managers;
     using HyperSample.Models;
     using HyperSample.UI.Views;
+    using DG.Tweening;
     
     /// <summary>
     /// Menu Installer Class
@@ -30,21 +32,39 @@ namespace HyperSample.Installers
     {
         [Header("General References")] 
         [SerializeField] private Transform ViewContainer;
+        [SerializeField] private AudioMixer MainMixer;
         
         [Header("View References")] 
         [SerializeField] private GameObject PreloaderViewPrefab;
-        [SerializeField] private GameObject PrivacyViewPrefab;
         [SerializeField] private GameObject TransitionViewPrefab;
         [SerializeField] private GameObject LazyLoadViewPrefab;
+        [SerializeField] private GameObject MainMenuViewPrefab;
+        [SerializeField] private GameObject SettingsViewPrefab;
+        [SerializeField] private GameObject StoreViewPrefab;
         
+        // Events
+        private UnityEvent<float, string> LoadingProgressEvent = new UnityEvent<float, string>();
+        
+        private UnityEvent ShowLoaderEvent = new UnityEvent();
+        private UnityEvent ShowTransitionEvent = new UnityEvent();
+        private UnityEvent HideTransitionEvent = new UnityEvent();
+        private UnityEvent CompleteLoadingEvent = new UnityEvent();
+        
+        private UnityEvent StartGameEvent = new UnityEvent();
+        private UnityEvent SettingsWindowEvent = new UnityEvent();
+        private UnityEvent StoreWindowEvent = new UnityEvent();
+
         /// <summary>
         /// On Start
         /// </summary>
         private void Start()
         {
-            // Initialize Events
-            UnityEvent<float, string> LoadingProgressEvent = new UnityEvent<float, string>();
-            UnityEvent ShowLoaderEvent = new UnityEvent();
+            // Initialize Data
+            GameStateModel state = (GameStateModel) GameManager.Instance().GetCurrentState();
+            
+            // Initialize Audio
+            MainMixer.SetFloat("MainGroup", -80f);
+            MainMixer.DOSetFloat("MainGroup", 0f, 2f);
 
             // Initialize Preloader
             PreloaderPm loaderPm = new PreloaderPm();
@@ -56,9 +76,43 @@ namespace HyperSample.Installers
                 ShowEvent = ShowLoaderEvent
             });
             
-            // Initialize Privacy
-            
             // Initialize Transition
+            TransitionPm transitionPm = new TransitionPm();
+            transitionPm.SetContext(new TransitionPm.Context()
+            {
+                ViewParent = ViewContainer,
+                ViewPrefab = TransitionViewPrefab,
+                
+                ShowEvent = ShowTransitionEvent,
+                OnShown = CompleteLoadingEvent,
+                HideEvent = HideTransitionEvent
+            });
+            
+            // Initialize Main Menu
+            MainMenuPm menuPm = new MainMenuPm();
+            menuPm.SetContext(new MainMenuPm.Context()
+            {
+                ViewParent = ViewContainer,
+                ViewPrefab = MainMenuViewPrefab,
+                
+                PlayButtonClicked = StartGameEvent,
+                SettingsButtonClicked = SettingsWindowEvent,
+                StoreButtonClicked = StoreWindowEvent
+            });
+            
+            // Initialize Settings
+            
+            // Initialize Store
+            
+            // Initialize Logic
+            HideTransitionEvent.Invoke();
+        }
+
+        /// <summary>
+        /// Load Game Level
+        /// </summary>
+        private void LoadGameLevel()
+        {
             
         }
     }
