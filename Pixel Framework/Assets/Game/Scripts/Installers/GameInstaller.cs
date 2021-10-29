@@ -15,15 +15,13 @@
  * @support         https://github.com/TinyPlay/PixelFramework/issues
  * @discord         https://discord.gg/wE67T7Vm
  */
-
-using UnityEngine.Purchasing;
-
 namespace HyperSample.Installers
 {
     using System.Collections.Generic;
     using UnityEngine;
     using PixelFramework.Managers;
     using HyperSample.Models;
+    using UnityEngine.Purchasing;
     
     /// <summary>
     /// Game Installer Class

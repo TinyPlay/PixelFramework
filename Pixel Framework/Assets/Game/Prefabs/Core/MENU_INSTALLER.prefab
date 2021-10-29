@@ -51,3 +51,7 @@ MonoBehaviour:
   MainMenuViewPrefab: {fileID: 4817771114169039059, guid: 651b79fb55005b3408da8fddda36873d, type: 3}
   SettingsViewPrefab: {fileID: 2879818189714305219, guid: f350d39fbca17da48957104125782a1d, type: 3}
   StoreViewPrefab: {fileID: 0}
+  LevelsViewPrefab: {fileID: 4959082260122224476, guid: 9ff95b10b35d05740b58c71275f632ca, type: 3}
+  LevelsNames:
+  - Level0
+  - Level1

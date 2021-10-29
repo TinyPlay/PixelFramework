@@ -45,6 +45,15 @@
     {
       "Code": "graphics_level_label",
       "Value": "HQ-ГРАФИКА:"
+    },
+
+    {
+      "Code": "select_game_level",
+      "Value": "SELECT THE LEVEL"
+    },
+    {
+      "Code": "level_header",
+      "Value": "УРОВЕНЬ"
     }
   ]
 }

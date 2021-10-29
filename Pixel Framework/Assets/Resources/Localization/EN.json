@@ -45,6 +45,15 @@
     {
       "Code": "graphics_level_label",
       "Value": "HQ-GRAPHICS:"
+    },
+
+    {
+      "Code": "select_game_level",
+      "Value": "CHOOSE A L"
+    },
+    {
+      "Code": "level_header",
+      "Value": "LEVEL"
     }
   ]
 }

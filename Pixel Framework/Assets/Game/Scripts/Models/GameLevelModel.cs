@@ -17,19 +17,11 @@
  */
 namespace HyperSample.Models
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using PixelFramework.Managers;
-
     [System.Serializable]
-    public class GameStateModel : IGameState
+    public class GameLevelModel
     {
-        // Base Game Params
-        public bool IsPrivacyAccepted = false;
-        
-        // Levels Data
-        public int CurrentLevel = 0;
-        public List<GameLevelModel> LevelDatas = new List<GameLevelModel>();
+        public bool IsCompleted = false;
+        public int StarsCount = 0;
+        public double ScoresCollected = 0;
     }
 }

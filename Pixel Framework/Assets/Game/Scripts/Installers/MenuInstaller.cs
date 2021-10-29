@@ -17,6 +17,7 @@
  */
 namespace HyperSample.Installers
 {
+    using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.Audio;
@@ -41,6 +42,10 @@ namespace HyperSample.Installers
         [SerializeField] private GameObject MainMenuViewPrefab;
         [SerializeField] private GameObject SettingsViewPrefab;
         [SerializeField] private GameObject StoreViewPrefab;
+        [SerializeField] private GameObject LevelsViewPrefab;
+
+        [Header("Levels Settings")] 
+        [SerializeField] private List<string> LevelsNames = new List<string>();
         
         // Events
         private UnityEvent<float, string> LoadingProgressEvent = new UnityEvent<float, string>();
@@ -50,9 +55,11 @@ namespace HyperSample.Installers
         private UnityEvent HideTransitionEvent = new UnityEvent();
         private UnityEvent CompleteLoadingEvent = new UnityEvent();
         
-        private UnityEvent StartGameEvent = new UnityEvent();
+        private UnityEvent<bool> StartGameEvent = new UnityEvent<bool>();
         private UnityEvent SettingsWindowEvent = new UnityEvent();
         private UnityEvent StoreWindowEvent = new UnityEvent();
+
+        private UnityEvent<int> LevelSelected = new UnityEvent<int>();
 
         /// <summary>
         /// On Start
@@ -99,7 +106,7 @@ namespace HyperSample.Installers
                 SettingsButtonClicked = SettingsWindowEvent,
                 StoreButtonClicked = StoreWindowEvent
             });
-            
+
             // Initialize Settings
             SettingsPm settingsPm = new SettingsPm();
             settingsPm.SetContext(new SettingsPm.Context()
@@ -112,16 +119,47 @@ namespace HyperSample.Installers
             // Initialize Store
             
             
+            // Initialize Level Selector
+            LevelSelectorPm levelsPm = new LevelSelectorPm();
+            levelsPm.SetContext(new LevelSelectorPm.Context()
+            {
+                ShowLevelsPanel = StartGameEvent,
+                LevelSelected = LevelSelected,
+                levelsNames = LevelsNames,
+                ViewParent = ViewContainer,
+                ViewPrefab = LevelsViewPrefab
+            });
+            LevelSelected.AddListener(levelId =>
+            {
+                LoadGameLevel(LevelsNames[levelId]);
+            });
+            
             // Initialize Logic
             HideTransitionEvent.Invoke();
+            
         }
 
         /// <summary>
         /// Load Game Level
         /// </summary>
-        private void LoadGameLevel()
+        private void LoadGameLevel(string level)
         {
-            
+            ShowLoaderEvent.Invoke();
+            GameManager.Instance().LoadScene(level, progress =>
+            {
+                LoadingProgressEvent.Invoke(progress, LocaleManager.Instance().GetItem("loading_state_1"));
+            }, operation =>
+            {
+                MainMixer.SetFloat("MainGroup", 0f);
+                MainMixer.DOSetFloat("MainGroup", -80f, 2f);
+                
+                LoadingProgressEvent.Invoke(1f, LocaleManager.Instance().GetItem("loading_state_1"));
+                CompleteLoadingEvent.AddListener(() =>
+                {
+                    operation.allowSceneActivation = true;
+                });
+                ShowTransitionEvent.Invoke();
+            });
         }
     }
 }

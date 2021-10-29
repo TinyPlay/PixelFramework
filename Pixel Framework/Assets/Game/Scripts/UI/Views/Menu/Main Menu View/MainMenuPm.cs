@@ -29,7 +29,7 @@ namespace HyperSample.UI.Views
         [System.Serializable]
         public class Context : IPmContext
         {
-            public UnityEvent PlayButtonClicked = new UnityEvent();
+            public UnityEvent<bool> PlayButtonClicked = new UnityEvent<bool>();
             public UnityEvent SettingsButtonClicked = new UnityEvent();
             public UnityEvent StoreButtonClicked = new UnityEvent();
             

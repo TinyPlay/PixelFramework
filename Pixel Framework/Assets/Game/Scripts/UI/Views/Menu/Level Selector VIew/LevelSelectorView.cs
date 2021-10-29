@@ -17,38 +17,44 @@
  */
 namespace HyperSample.UI.Views
 {
+    using System;
+    using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.UI;
     using UnityEngine.Events;
     using PixelFramework.UI.View;
     using PixelFramework.UI.Components;
+    using PixelFramework.Managers;
+    using HyperSample.Models;
+    using HyperSample.UI.Components;
     
     /// <summary>
-    /// Main Menu View
+    /// Level Selector View
     /// </summary>
-    internal class MainMenuView : BaseView
+    internal class LevelSelectorView : BaseView
     {
         // Context
         [System.Serializable]
         public class Context : IViewContext
         {
             // Events
-            public UnityEvent<bool> OnPlayButtonClicked;
-            public UnityEvent OnSettingsButtonClicked;
-            public UnityEvent OnStoreButtonClicked;
+            public UnityEvent<bool> OnLevelsOpen;
+            public Action<int> OnLevelLaunched;
+
+            public int CurrentLevel = 0;
+            public List<GameLevelModel> Levels = new List<GameLevelModel>();
         }
         
         // View References
-        [Header("View References")] 
-        [SerializeField] private Button _playButton;
-        [SerializeField] private Button _settingButton;
-        [SerializeField] private Button _storeButton;
+        [Header("View References")]
         [SerializeField] private AudioClip _clickSoundFX;
+        [SerializeField] private Transform _levelsContainer;
+        [SerializeField] private GameObject _levelItemTemplate;
         
         // Private Params
         private AudioSource _audioSource;
-        private bool _isPanelShown = false;
-        
+        private bool _isLevelsInitialized = false;
+
         /// <summary>
         /// On Context Initialized
         /// </summary>
@@ -65,22 +71,40 @@ namespace HyperSample.UI.Views
                 _audioSource.playOnAwake = false;
             }
             
+            // Initialize Levels
+            if (!_isLevelsInitialized)
+            {
+                _isLevelsInitialized = true;
+
+                int levelIndex = 0;
+                foreach (GameLevelModel levelData in ctx.Levels)
+                {
+                    GameObject levelItemObject = Instantiate(_levelItemTemplate, _levelsContainer);
+                    levelItemObject.transform.SetAsLastSibling();
+                    levelItemObject.GetComponent<LevelItemView>().SetContext(new LevelItemView.Context()
+                    {
+                        IsLocked = (ctx.CurrentLevel < levelIndex)?true:false,
+                        CurrentLevel = (levelIndex),
+                        OnLevelClicked = level =>
+                        {
+                            ctx.OnLevelLaunched.Invoke(level);
+                        },
+                        StarsCount = levelData.StarsCount
+                    });
+                    
+                    levelIndex++;
+                }
+            }
+            
             // Add Handlers
-            _playButton.onClick.AddListener(() =>
+            ctx.OnLevelsOpen.AddListener(isOpen =>
             {
+                if (isOpen) 
+                    ShowView();
+                else
+                    HideView();
+                
                 if(_audioSource.clip!=null) _audioSource.Play();
-                _isPanelShown = !_isPanelShown;
-                if(ctx.OnPlayButtonClicked!=null) ctx.OnPlayButtonClicked.Invoke(_isPanelShown);
-            });
-            _settingButton.onClick.AddListener(() =>
-            {
-                if(_audioSource.clip!=null) _audioSource.Play();
-                if(ctx.OnSettingsButtonClicked!=null) ctx.OnSettingsButtonClicked.Invoke();
-            });
-            _storeButton.onClick.AddListener(() =>
-            {
-                if(_audioSource.clip!=null) _audioSource.Play();
-                if(ctx.OnStoreButtonClicked!=null) ctx.OnStoreButtonClicked.Invoke();
             });
         }
         
@@ -91,15 +115,8 @@ namespace HyperSample.UI.Views
         {
             Context ctx = (Context) GetContext();
             
-            // Remove Events Listeners
-            if(ctx.OnPlayButtonClicked!=null) ctx.OnPlayButtonClicked.RemoveAllListeners();
-            if(ctx.OnSettingsButtonClicked!=null) ctx.OnSettingsButtonClicked.RemoveAllListeners();
-            if(ctx.OnStoreButtonClicked!=null) ctx.OnStoreButtonClicked.RemoveAllListeners();
-            
-            // Remove Button Listeners
-            _playButton.onClick.RemoveAllListeners();
-            _settingButton.onClick.RemoveAllListeners();
-            _storeButton.onClick.RemoveAllListeners();
+            // General Handlers
+            if(ctx.OnLevelsOpen!=null) ctx.OnLevelsOpen.RemoveAllListeners();
         }
     }
 }
