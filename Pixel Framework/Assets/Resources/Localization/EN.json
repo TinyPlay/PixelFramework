@@ -37,6 +37,14 @@
     {
       "Code": "voice_volume_label",
       "Value": "VOICES VOLUME:"
+    },
+    {
+      "Code": "language_label",
+      "Value": "LANGUAGE:"
+    },
+    {
+      "Code": "graphics_level_label",
+      "Value": "HQ-GRAPHICS:"
     }
   ]
 }

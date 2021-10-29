@@ -18,11 +18,13 @@
 namespace HyperSample.UI.Views
 {
     using System;
+    using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.UI;
     using UnityEngine.Events;
     using PixelFramework.UI.View;
     using PixelFramework.UI.Components;
+    using PixelFramework.Managers;
     
     /// <summary>
     /// Settings View Class
@@ -48,8 +50,17 @@ namespace HyperSample.UI.Views
         // View References
         [Header("View References")] 
         [SerializeField] private Button _closeButton;
-        
         [SerializeField] private AudioClip _clickSoundFX;
+
+        [Header("Settings Editors")] 
+        [SerializeField] private Slider _masterVolumeSlider;
+        [SerializeField] private Slider _soundsVolumeSlider;
+        [SerializeField] private Slider _musicVolumeSlider;
+        [SerializeField] private Slider _voiceVolumeSlider;
+
+        [SerializeField] private List<LocaleEditorModel> _localeSwitchers = new List<LocaleEditorModel>();
+
+        [SerializeField] private Switcher _hqGraphicsSwitcher;
         
         
         // Private Params
@@ -71,11 +82,57 @@ namespace HyperSample.UI.Views
                 _audioSource.playOnAwake = false;
             }
             
+            // Add Audio Settings Switchers
+            _masterVolumeSlider.value = AudioManager.Instance().GetMasterVolume();
+            _masterVolumeSlider.onValueChanged.AddListener(val =>
+            {
+                ctx.OnMasterVolumeChanged.Invoke(val);
+            });
+            _soundsVolumeSlider.value = AudioManager.Instance().GetSoundsVolume();
+            _soundsVolumeSlider.onValueChanged.AddListener(val =>
+            {
+                ctx.OnSoundsSettingsChanged.Invoke(val);
+            });
+            _musicVolumeSlider.value = AudioManager.Instance().GetMusicVolume();
+            _musicVolumeSlider.onValueChanged.AddListener(val =>
+            {
+                ctx.OnMusicSettingsChanged.Invoke(val);
+            });
+            _voiceVolumeSlider.value = AudioManager.Instance().GetVoicesVolume();
+            _voiceVolumeSlider.onValueChanged.AddListener(val =>
+            {
+                ctx.OnVoiceSettingsChanged.Invoke(val);
+            });
+            
+            // Add Language Settings Switchers
+            foreach (LocaleEditorModel editor in _localeSwitchers)
+            {
+                editor.localeButton.onClick.AddListener(() =>
+                {
+                    ctx.OnLanguageChanged.Invoke(editor.localeCode);
+                    if(_audioSource.clip!=null) _audioSource.Play();
+                });
+            }
+            
+            // Add Graphics Switcher
+            _hqGraphicsSwitcher.SetContext(new Switcher.Context()
+            {
+                DefaultValue = (GraphicsManager.Instance().GetQualityLevel() == 1),
+                OnSwitcherUpdate = isHq =>
+                {
+                    ctx.OnGraphiscLevelChanged.Invoke(isHq?1:0);
+                }
+            });
+            
             // Add Handlers
             _closeButton.onClick.AddListener(() =>
             {
                 if(_audioSource.clip!=null) _audioSource.Play();
                 HideView();
+            });
+            ctx.OnSettingsOpen.AddListener(() =>
+            {
+                ShowView();
             });
         }
 
@@ -88,9 +145,18 @@ namespace HyperSample.UI.Views
             
             // General Handlers
             if(ctx.OnSettingsOpen!=null) ctx.OnSettingsOpen.RemoveAllListeners();
-            
+
             // Additional Handlers
             _closeButton.onClick.RemoveAllListeners();
+            _masterVolumeSlider.onValueChanged.RemoveAllListeners();
+            _soundsVolumeSlider.onValueChanged.RemoveAllListeners();
+            _musicVolumeSlider.onValueChanged.RemoveAllListeners();
+            _voiceVolumeSlider.onValueChanged.RemoveAllListeners();
+            
+            foreach (LocaleEditorModel editor in _localeSwitchers)
+            {
+                editor.localeButton.onClick.RemoveAllListeners();
+            }
         }
     }
 }

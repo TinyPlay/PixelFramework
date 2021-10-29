@@ -83,7 +83,7 @@ namespace PixelFramework.Components.Audio
                     break;
             }
 
-            _audioSource.volume = _baseVolume;
+            _audioSource.volume = newVolume;
         }
     }
 }

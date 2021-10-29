@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ViewContainer: {fileID: 0}
-  MainMixer: {fileID: 0}
+  MainMixer: {fileID: 24100000, guid: 0434c421d7eda5646b2fecf7bacd44a6, type: 2}
   PreloaderViewPrefab: {fileID: 5374287076401985256, guid: e0f52adba597a674b95061c7e3ae4182, type: 3}
   TransitionViewPrefab: {fileID: 512679486568536053, guid: 94fd81f5a0a360042a358ab207345fb2, type: 3}
   LazyLoadViewPrefab: {fileID: 7439485608055917341, guid: 3ea88a32774b4c1449f3187294611af8, type: 3}
   MainMenuViewPrefab: {fileID: 4817771114169039059, guid: 651b79fb55005b3408da8fddda36873d, type: 3}
-  SettingsViewPrefab: {fileID: 0}
+  SettingsViewPrefab: {fileID: 2879818189714305219, guid: f350d39fbca17da48957104125782a1d, type: 3}
   StoreViewPrefab: {fileID: 0}

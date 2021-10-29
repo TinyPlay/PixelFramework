@@ -102,9 +102,15 @@ namespace HyperSample.Installers
             
             // Initialize Settings
             SettingsPm settingsPm = new SettingsPm();
-            
+            settingsPm.SetContext(new SettingsPm.Context()
+            {
+                SettingsOpen = SettingsWindowEvent,
+                ViewParent = ViewContainer,
+                ViewPrefab = SettingsViewPrefab
+            });
             
             // Initialize Store
+            
             
             // Initialize Logic
             HideTransitionEvent.Invoke();

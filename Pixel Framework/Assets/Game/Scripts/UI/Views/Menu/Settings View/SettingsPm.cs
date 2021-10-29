@@ -54,31 +54,37 @@ namespace HyperSample.UI.Views
                 OnSettingsOpen = ctx.SettingsOpen,
                 OnGraphiscLevelChanged = level =>
                 {
+                    Debug.Log($"Switch Graphics Level To: {level}");
                     GraphicsManager.Instance().SetQualityLevel(level);
                 },
                 
                 OnLanguageChanged = locale =>
                 {
+                    Debug.Log($"Switch locale To: {locale}");
                     LocaleManager.Instance().SwitchLanguage(locale);
                 },
                 
                 OnMasterVolumeChanged = volume =>
                 {
+                    Debug.Log($"Switch Master Volume To: {volume}");
                     AudioManager.Instance().SetMasterVolume(volume);
                 },
                 OnMusicSettingsChanged = volume =>
                 {
+                    Debug.Log($"Switch Music Volume To: {volume}");
                     AudioManager.Instance().SetMusicVolume(volume);
                 },
                 OnSoundsSettingsChanged = volume =>
                 {
+                    Debug.Log($"Switch Sounds Volume To: {volume}");
                     AudioManager.Instance().SetSoundsVolume(volume);
                 },
                 OnVoiceSettingsChanged = volume =>
                 {
+                    Debug.Log($"Switch Voice Volume To: {volume}");
                     AudioManager.Instance().SetVoicesVolume(volume);
                 }
-            }).ShowView();
+            });
         }
     }
 }
