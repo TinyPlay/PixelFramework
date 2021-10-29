@@ -16,6 +16,27 @@
     {
       "Code": "privacy_text",
       "Value": "Our game uses technology to process analytics and advertising metrics. By launching the game, you agree to the transfer and storage of data to the game developer."
+    },
+
+    {
+      "Code": "settings_header",
+      "Value": "GAME SETTINGS"
+    },
+    {
+      "Code": "master_volume_label",
+      "Value": "GENERAL VOLUME:"
+    },
+    {
+      "Code": "sounds_volume_label",
+      "Value": "AUDIO SFX VOLUME:"
+    },
+    {
+      "Code": "music_volume_label",
+      "Value": "MUSIC VOLUME:"
+    },
+    {
+      "Code": "voice_volume_label",
+      "Value": "VOICES VOLUME:"
     }
   ]
 }

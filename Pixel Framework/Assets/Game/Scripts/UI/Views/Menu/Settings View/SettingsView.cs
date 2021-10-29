@@ -17,6 +17,7 @@
  */
 namespace HyperSample.UI.Views
 {
+    using System;
     using UnityEngine;
     using UnityEngine.UI;
     using UnityEngine.Events;
@@ -28,6 +29,68 @@ namespace HyperSample.UI.Views
     /// </summary>
     internal class SettingsView : BaseView
     {
+        // Context
+        [System.Serializable]
+        public class Context : IViewContext
+        {
+            // Events
+            public UnityEvent OnSettingsOpen;
+
+            public Action<float> OnMasterVolumeChanged;
+            public Action<float> OnSoundsSettingsChanged;
+            public Action<float> OnMusicSettingsChanged;
+            public Action<float> OnVoiceSettingsChanged;
+
+            public Action<int> OnGraphiscLevelChanged;
+            public Action<string> OnLanguageChanged;
+        }
         
+        // View References
+        [Header("View References")] 
+        [SerializeField] private Button _closeButton;
+        
+        [SerializeField] private AudioClip _clickSoundFX;
+        
+        
+        // Private Params
+        private AudioSource _audioSource;
+
+        /// <summary>
+        /// On Context Initialized
+        /// </summary>
+        public override void OnContextInitialized()
+        {
+            Context ctx = (Context) GetContext();
+            
+            // Initialize Audio
+            if (_audioSource == null)
+            {
+                _audioSource = gameObject.AddComponent<AudioSource>();
+                _audioSource.clip = _clickSoundFX;
+                _audioSource.loop = false;
+                _audioSource.playOnAwake = false;
+            }
+            
+            // Add Handlers
+            _closeButton.onClick.AddListener(() =>
+            {
+                if(_audioSource.clip!=null) _audioSource.Play();
+                HideView();
+            });
+        }
+
+        /// <summary>
+        /// On View Destroyed
+        /// </summary>
+        public override void OnViewDestroyed()
+        {
+            Context ctx = (Context) GetContext();
+            
+            // General Handlers
+            if(ctx.OnSettingsOpen!=null) ctx.OnSettingsOpen.RemoveAllListeners();
+            
+            // Additional Handlers
+            _closeButton.onClick.RemoveAllListeners();
+        }
     }
 }

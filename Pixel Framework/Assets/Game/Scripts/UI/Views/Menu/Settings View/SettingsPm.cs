@@ -20,12 +20,65 @@ namespace HyperSample.UI.Views
     using UnityEngine;
     using PixelFramework.UI.View;
     using UnityEngine.Events;
+    using PixelFramework.Managers;
     
     /// <summary>
     /// Settings Controller
     /// </summary>
     public class SettingsPm : BasePm
     {
+        [System.Serializable]
+        public class Context : IPmContext
+        {
+            public UnityEvent SettingsOpen = new UnityEvent();
+
+            public Transform ViewParent;
+            public GameObject ViewPrefab;
+        }
         
+        /// <summary>
+        /// On Context Initialized
+        /// </summary>
+        public override void OnContextInitialized()
+        {
+            // Get Context
+            Context ctx = (Context) GetContext();
+            
+            // Initialize View
+            GameObject viewPrefab = GameObject.Instantiate(ctx.ViewPrefab, ctx.ViewParent);
+            SettingsView view = viewPrefab.GetComponent<SettingsView>();
+            
+            // Initialize and Show View
+            view.SetContext(new SettingsView.Context()
+            {
+                OnSettingsOpen = ctx.SettingsOpen,
+                OnGraphiscLevelChanged = level =>
+                {
+                    GraphicsManager.Instance().SetQualityLevel(level);
+                },
+                
+                OnLanguageChanged = locale =>
+                {
+                    LocaleManager.Instance().SwitchLanguage(locale);
+                },
+                
+                OnMasterVolumeChanged = volume =>
+                {
+                    AudioManager.Instance().SetMasterVolume(volume);
+                },
+                OnMusicSettingsChanged = volume =>
+                {
+                    AudioManager.Instance().SetMusicVolume(volume);
+                },
+                OnSoundsSettingsChanged = volume =>
+                {
+                    AudioManager.Instance().SetSoundsVolume(volume);
+                },
+                OnVoiceSettingsChanged = volume =>
+                {
+                    AudioManager.Instance().SetVoicesVolume(volume);
+                }
+            }).ShowView();
+        }
     }
 }

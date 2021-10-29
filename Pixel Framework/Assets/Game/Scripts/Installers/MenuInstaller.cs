@@ -101,6 +101,8 @@ namespace HyperSample.Installers
             });
             
             // Initialize Settings
+            SettingsPm settingsPm = new SettingsPm();
+            
             
             // Initialize Store
             
