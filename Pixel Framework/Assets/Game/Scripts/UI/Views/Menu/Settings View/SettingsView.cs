@@ -25,6 +25,7 @@ namespace HyperSample.UI.Views
     using PixelFramework.UI.View;
     using PixelFramework.UI.Components;
     using PixelFramework.Managers;
+    using PixelFramework.Components.Audio;
     
     /// <summary>
     /// Settings View Class
@@ -77,6 +78,7 @@ namespace HyperSample.UI.Views
             if (_audioSource == null)
             {
                 _audioSource = gameObject.AddComponent<AudioSource>();
+                gameObject.AddComponent<AudioSourceVolumeManager>().AudioSourceType = AudioSourceType.SoundFX;
                 _audioSource.clip = _clickSoundFX;
                 _audioSource.loop = false;
                 _audioSource.playOnAwake = false;

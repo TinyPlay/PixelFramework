@@ -24,6 +24,7 @@ namespace HyperSample.UI.Views
     using UnityEngine.Events;
     using PixelFramework.UI.View;
     using PixelFramework.UI.Components;
+    using PixelFramework.Components.Audio;
     using PixelFramework.Managers;
     using HyperSample.Models;
     using HyperSample.UI.Components;
@@ -66,6 +67,7 @@ namespace HyperSample.UI.Views
             if (_audioSource == null)
             {
                 _audioSource = gameObject.AddComponent<AudioSource>();
+                gameObject.AddComponent<AudioSourceVolumeManager>().AudioSourceType = AudioSourceType.SoundFX;
                 _audioSource.clip = _clickSoundFX;
                 _audioSource.loop = false;
                 _audioSource.playOnAwake = false;

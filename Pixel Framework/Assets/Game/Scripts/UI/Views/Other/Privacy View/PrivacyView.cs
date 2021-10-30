@@ -23,6 +23,8 @@ namespace HyperSample.UI.Views
     using UnityEngine.Events;
     using PixelFramework.UI.View;
     using PixelFramework.UI.Components;
+    using PixelFramework.Components.Audio;
+    using PixelFramework.Managers;
     
     /// <summary>
     /// Privacy View Class
@@ -59,6 +61,7 @@ namespace HyperSample.UI.Views
             if (_audioSource == null)
             {
                 _audioSource = gameObject.AddComponent<AudioSource>();
+                gameObject.AddComponent<AudioSourceVolumeManager>().AudioSourceType = AudioSourceType.SoundFX;
                 _audioSource.clip = _clickSoundFX;
                 _audioSource.loop = false;
                 _audioSource.playOnAwake = false;

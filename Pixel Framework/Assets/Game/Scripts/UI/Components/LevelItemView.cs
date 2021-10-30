@@ -23,6 +23,8 @@ namespace HyperSample.UI.Components
     using UnityEngine.UI;
     using UnityEngine.Events;
     using PixelFramework.UI.Components;
+    using PixelFramework.Components.Audio;
+    using PixelFramework.Managers;
     
     /// <summary>
     /// Level Item View
@@ -70,6 +72,7 @@ namespace HyperSample.UI.Components
             if (_audioSource == null)
             {
                 _audioSource = gameObject.AddComponent<AudioSource>();
+                gameObject.AddComponent<AudioSourceVolumeManager>().AudioSourceType = AudioSourceType.SoundFX;
                 _audioSource.clip = _clickSoundFX;
                 _audioSource.loop = false;
                 _audioSource.playOnAwake = false;
