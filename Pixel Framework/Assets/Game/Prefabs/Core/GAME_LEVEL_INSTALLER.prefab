@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1616240791363497787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3019779839699977851}
+  - component: {fileID: 2589378197420043505}
+  m_Layer: 0
+  m_Name: GAME_LEVEL_INSTALLER
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3019779839699977851
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616240791363497787}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2589378197420043505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616240791363497787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66f94f6d37b8412fbf43915992b06ad5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ViewContainer: {fileID: 0}
+  MainMixer: {fileID: 24100000, guid: 0434c421d7eda5646b2fecf7bacd44a6, type: 2}
+  PreloaderViewPrefab: {fileID: 5374287076401985256, guid: e0f52adba597a674b95061c7e3ae4182, type: 3}
+  TransitionViewPrefab: {fileID: 512679486568536053, guid: 94fd81f5a0a360042a358ab207345fb2, type: 3}
+  MainUIPrefab: {fileID: 6777781580893786442, guid: 88b4e281f3c422b4ca52d837a38c26ca, type: 3}
+  WinUIPrefab: {fileID: 7792397539302644447, guid: 96f9db248670a6b42918370752e75c59, type: 3}
+  LoseUIPrefab: {fileID: 4141070653829667569, guid: 80ff05f0d2a6f244c96e7decb174dac6, type: 3}
+  PauseUIPrefab: {fileID: 6900992874296652884, guid: 7078cb3150fa8b04e974908dc539b728, type: 3}
+  TutorialUIPrefab: {fileID: 5770544118365048396, guid: 9c74cdda7589ff9408bde813fb875a63, type: 3}

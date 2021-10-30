@@ -1,0 +1,85 @@
+﻿{
+  "LocalesData": [
+    {
+      "Code": "loading_state_0",
+      "Value": "Инициализация..."
+    },
+    {
+      "Code": "loading_state_1",
+      "Value": "Загрузка сцены..."
+    },
+
+    {
+      "Code": "privacy_header",
+      "Value": "ПОЛИТИКА ДАННЫХ"
+    },
+    {
+      "Code": "privacy_text",
+      "Value": "Наша игра использует технологии для обработки аналитики и рекламных показателей. Запуская игру, вы соглашаетесь на передачу и хранение данных разработчику игры."
+    },
+
+    {
+      "Code": "settings_header",
+      "Value": "НАСТРОЙКИ ИГРЫ"
+    },
+    {
+      "Code": "master_volume_label",
+      "Value": "ОБЩАЯ ГРОМКОСТЬ:"
+    },
+    {
+      "Code": "sounds_volume_label",
+      "Value": "ЗВУКОВЫЕ ЭФФЕКТЫ:"
+    },
+    {
+      "Code": "music_volume_label",
+      "Value": "ГРОМКОСТЬ МУЗЫКИ:"
+    },
+    {
+      "Code": "voice_volume_label",
+      "Value": "ОЗВУЧКА ПЕРСОНАЖЕЙ:"
+    },
+    {
+      "Code": "language_label",
+      "Value": "ЯЗЫК:"
+    },
+    {
+      "Code": "graphics_level_label",
+      "Value": "HQ-ГРАФИКА:"
+    },
+
+    {
+      "Code": "select_game_level",
+      "Value": "SELECT THE LEVEL"
+    },
+    {
+      "Code": "level_header",
+      "Value": "УРОВЕНЬ"
+    },
+
+    {
+      "Code": "pause_header",
+      "Value": "ПАУЗА"
+    },
+    {
+      "Code": "continue_game",
+      "Value": "ПРОДОЛЖИТЬ ИГРУ"
+    },
+    {
+      "Code": "exit_to_menu",
+      "Value": "ВЫЙТИ В МЕНЮ"
+    },
+
+    {
+      "Code": "win_header",
+      "Value": "ПОБЕДА!"
+    },
+    {
+      "Code": "lose_header",
+      "Value": "ПОРАЖЕНИЕ!"
+    },
+    {
+      "Code": "lose_desc",
+      "Value": "К сожалению, вы не смогли добежать до конца уровня. \nНо мы можем попробовать снова!"
+    }
+  ]
+}

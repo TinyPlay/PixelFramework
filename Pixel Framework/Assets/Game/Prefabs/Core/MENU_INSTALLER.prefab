@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5955133972099942382
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7741193801808716194}
+  - component: {fileID: 8287952742855073570}
+  m_Layer: 0
+  m_Name: MENU_INSTALLER
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7741193801808716194
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5955133972099942382}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8287952742855073570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5955133972099942382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6adcdc3e6d5343a291d056c58e2010a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ViewContainer: {fileID: 0}
+  MainMixer: {fileID: 24100000, guid: 0434c421d7eda5646b2fecf7bacd44a6, type: 2}
+  PreloaderViewPrefab: {fileID: 5374287076401985256, guid: e0f52adba597a674b95061c7e3ae4182, type: 3}
+  TransitionViewPrefab: {fileID: 512679486568536053, guid: 94fd81f5a0a360042a358ab207345fb2, type: 3}
+  LazyLoadViewPrefab: {fileID: 7439485608055917341, guid: 3ea88a32774b4c1449f3187294611af8, type: 3}
+  MainMenuViewPrefab: {fileID: 4817771114169039059, guid: 651b79fb55005b3408da8fddda36873d, type: 3}
+  SettingsViewPrefab: {fileID: 2879818189714305219, guid: f350d39fbca17da48957104125782a1d, type: 3}
+  StoreViewPrefab: {fileID: 0}
+  LevelsViewPrefab: {fileID: 4959082260122224476, guid: 9ff95b10b35d05740b58c71275f632ca, type: 3}
+  LevelsNames:
+  - Level0
+  - Level1

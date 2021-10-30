@@ -1,0 +1,85 @@
+﻿{
+  "LocalesData": [
+    {
+      "Code": "loading_state_0",
+      "Value": "Initialization..."
+    },
+    {
+      "Code": "loading_state_1",
+      "Value": "Загрузка сцены..."
+    },
+
+    {
+      "Code": "privacy_header",
+      "Value": "PRIVACY NOTICE"
+    },
+    {
+      "Code": "privacy_text",
+      "Value": "Our game uses technology to process analytics and advertising metrics. By launching the game, you agree to the transfer and storage of data to the game developer."
+    },
+
+    {
+      "Code": "settings_header",
+      "Value": "GAME SETTINGS"
+    },
+    {
+      "Code": "master_volume_label",
+      "Value": "GENERAL VOLUME:"
+    },
+    {
+      "Code": "sounds_volume_label",
+      "Value": "AUDIO SFX VOLUME:"
+    },
+    {
+      "Code": "music_volume_label",
+      "Value": "MUSIC VOLUME:"
+    },
+    {
+      "Code": "voice_volume_label",
+      "Value": "VOICES VOLUME:"
+    },
+    {
+      "Code": "language_label",
+      "Value": "LANGUAGE:"
+    },
+    {
+      "Code": "graphics_level_label",
+      "Value": "HQ-GRAPHICS:"
+    },
+
+    {
+      "Code": "select_game_level",
+      "Value": "CHOOSE A L"
+    },
+    {
+      "Code": "level_header",
+      "Value": "LEVEL"
+    },
+
+    {
+      "Code": "pause_header",
+      "Value": "PAUSE"
+    },
+    {
+      "Code": "continue_game",
+      "Value": "CONTIUNE"
+    },
+    {
+      "Code": "exit_to_menu",
+      "Value": "EXIT TO MENU"
+    },
+
+    {
+      "Code": "win_header",
+      "Value": "CONGRATS!"
+    },
+    {
+      "Code": "lose_header",
+      "Value": "YOU LOSE!"
+    },
+    {
+      "Code": "lose_desc",
+      "Value": "Unfortunately, you couldn't make it to the end of the level. \nBut we can try again!"
+    }
+  ]
+}
