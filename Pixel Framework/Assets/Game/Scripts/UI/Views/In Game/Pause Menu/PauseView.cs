@@ -17,6 +17,8 @@
  */
 namespace HyperSample.UI.Views
 {
+    using System;
+    using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.UI;
     using UnityEngine.Events;
@@ -26,40 +28,28 @@ namespace HyperSample.UI.Views
     using PixelFramework.Components.Audio;
     
     /// <summary>
-    /// Main Menu View
+    /// Pause View Class
     /// </summary>
-    internal class MainMenuView : BaseView
+    internal class PauseView : BaseView
     {
         // Context
         [System.Serializable]
         public class Context : IViewContext
         {
             // Events
-            public UnityEvent<bool> OnPlayButtonClicked;
-            public UnityEvent OnSettingsButtonClicked;
-            public UnityEvent OnStoreButtonClicked;
-            
-            // Datas
-            public int CoinsValue = 0;
-            public int StarsValue = 0;
+            public UnityEvent<bool> OnGamePause;
+            public Action OnMainMenuExit;
         }
         
         // View References
         [Header("View References")] 
-        [SerializeField] private Button _playButton;
-        [SerializeField] private Button _settingButton;
-        [SerializeField] private Button _storeButton;
+        [SerializeField] private Button _continuePlay;
+        [SerializeField] private Button _exitToMenu;
         [SerializeField] private AudioClip _clickSoundFX;
-
-        [Header("Currency References")] 
-        [SerializeField] private Text _coinsField;
-        [SerializeField] private Text _starsField;
-        
         
         // Private Params
         private AudioSource _audioSource;
-        private bool _isPanelShown = false;
-        
+
         /// <summary>
         /// On Context Initialized
         /// </summary>
@@ -78,55 +68,33 @@ namespace HyperSample.UI.Views
             }
             
             // Add Handlers
-            _playButton.onClick.AddListener(() =>
+            _continuePlay.onClick.AddListener(() =>
             {
                 if(_audioSource.clip!=null) _audioSource.Play();
-                _isPanelShown = !_isPanelShown;
-                if(ctx.OnPlayButtonClicked!=null) ctx.OnPlayButtonClicked.Invoke(_isPanelShown);
+                ctx.OnGamePause.Invoke(false);
             });
-            _settingButton.onClick.AddListener(() =>
+            _exitToMenu.onClick.AddListener(() =>
             {
                 if(_audioSource.clip!=null) _audioSource.Play();
-                if(ctx.OnSettingsButtonClicked!=null) ctx.OnSettingsButtonClicked.Invoke();
+                ctx.OnGamePause.Invoke(false);
+                if(ctx.OnMainMenuExit!=null) ctx.OnMainMenuExit.Invoke();
             });
-            _storeButton.onClick.AddListener(() =>
+            ctx.OnGamePause.AddListener(isShown =>
             {
-                if(_audioSource.clip!=null) _audioSource.Play();
-                if(ctx.OnStoreButtonClicked!=null) ctx.OnStoreButtonClicked.Invoke();
+                if (isShown)
+                    ShowView();
+                else
+                    HideView();
             });
-            
-            // Update View
-            UpdateView();
         }
-        
+
         /// <summary>
         /// On View Destroyed
         /// </summary>
         public override void OnViewDestroyed()
         {
             Context ctx = (Context) GetContext();
-            
-            // Remove Events Listeners
-            if(ctx.OnPlayButtonClicked!=null) ctx.OnPlayButtonClicked.RemoveAllListeners();
-            if(ctx.OnSettingsButtonClicked!=null) ctx.OnSettingsButtonClicked.RemoveAllListeners();
-            if(ctx.OnStoreButtonClicked!=null) ctx.OnStoreButtonClicked.RemoveAllListeners();
-            
-            // Remove Button Listeners
-            _playButton.onClick.RemoveAllListeners();
-            _settingButton.onClick.RemoveAllListeners();
-            _storeButton.onClick.RemoveAllListeners();
-        }
-
-        /// <summary>
-        /// Update View
-        /// </summary>
-        /// <returns></returns>
-        public override IBaseView UpdateView()
-        {
-            Context ctx = (Context) GetContext();
-            _coinsField.text = ctx.CoinsValue.ToString("N0");
-            _starsField.text = ctx.StarsValue.ToString("N0");
-            return this;
+            if(ctx.OnGamePause!=null) ctx.OnGamePause.RemoveAllListeners();
         }
     }
 }

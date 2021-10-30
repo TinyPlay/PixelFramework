@@ -136,7 +136,6 @@ namespace HyperSample.Installers
             
             // Initialize Logic
             HideTransitionEvent.Invoke();
-            
         }
 
         /// <summary>

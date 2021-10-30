@@ -15,28 +15,24 @@
  * @support         https://github.com/TinyPlay/PixelFramework/issues
  * @discord         https://discord.gg/wE67T7Vm
  */
-
-using PixelFramework.Managers;
-
 namespace HyperSample.UI.Views
 {
     using UnityEngine;
     using PixelFramework.UI.View;
     using UnityEngine.Events;
-    using HyperSample.Models;
+    using PixelFramework.Managers;
     
     /// <summary>
-    /// Main Menu Controller
+    /// Pause Menu Controller
     /// </summary>
-    public class MainMenuPm : BasePm
+    public class PausePm : BasePm
     {
         [System.Serializable]
         public class Context : IPmContext
         {
-            public UnityEvent<bool> PlayButtonClicked = new UnityEvent<bool>();
-            public UnityEvent SettingsButtonClicked = new UnityEvent();
-            public UnityEvent StoreButtonClicked = new UnityEvent();
-            
+            public UnityEvent<bool> GamePaused = new UnityEvent<bool>();
+            public UnityEvent OnMenuExit = new UnityEvent();
+
             public Transform ViewParent;
             public GameObject ViewPrefab;
         }
@@ -48,22 +44,19 @@ namespace HyperSample.UI.Views
         {
             // Get Context
             Context ctx = (Context) GetContext();
-            GameStateModel gameData = (GameStateModel) GameManager.Instance().GetCurrentState();
             
             // Initialize View
             GameObject viewPrefab = GameObject.Instantiate(ctx.ViewPrefab, ctx.ViewParent);
-            MainMenuView view = viewPrefab.GetComponent<MainMenuView>();
-            
-            // Initialize and Show View
-            view.SetContext(new MainMenuView.Context()
+            PauseView view = viewPrefab.GetComponent<PauseView>();
+
+            view.SetContext(new PauseView.Context()
             {
-                OnPlayButtonClicked = ctx.PlayButtonClicked,
-                OnSettingsButtonClicked = ctx.SettingsButtonClicked,
-                OnStoreButtonClicked = ctx.StoreButtonClicked,
-                
-                CoinsValue = gameData.HardCurrency,
-                StarsValue = gameData.SoftCurrency
-            }).ShowView();
+                OnGamePause = ctx.GamePaused,
+                OnMainMenuExit = () =>
+                {
+                    ctx.OnMenuExit.Invoke();
+                }
+            });
         }
     }
 }

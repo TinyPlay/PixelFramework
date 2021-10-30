@@ -91,7 +91,7 @@ namespace PixelFramework.UI.Components
         /// </summary>
         private void OnDestroy()
         {
-            _currentButtonHolder.onClick.RemoveAllListeners();
+            if(_currentButtonHolder!=null) _currentButtonHolder.onClick.RemoveAllListeners();
         }
         
         /// <summary>

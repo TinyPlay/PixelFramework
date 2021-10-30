@@ -210,6 +210,7 @@ MonoBehaviour:
   _clickSoundFX: {fileID: 8300000, guid: d30a767d2a816144eb457be11616588e, type: 3}
   _levelsContainer: {fileID: 4959082261784026017}
   _levelItemTemplate: {fileID: 7970553945893173650, guid: 51dbcef10f89ea042991d43d31f51cf4, type: 3}
+  _starsField: {fileID: 4959082261311530342}
 --- !u!1 &4959082260153510865
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,8 +476,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4959082261044948258}
   m_HandleRect: {fileID: 4959082261044948259}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.44623518
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -877,8 +878,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4959082260471085192}
   m_HandleRect: {fileID: 4959082260471085193}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 0.99999994
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1239,7 +1240,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -475.49496, y: 1240.4692}
   m_SizeDelta: {x: 0.000030518, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &4959082261784026016

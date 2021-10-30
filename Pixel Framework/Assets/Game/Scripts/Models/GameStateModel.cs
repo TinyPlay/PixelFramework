@@ -28,6 +28,10 @@ namespace HyperSample.Models
         // Base Game Params
         public bool IsPrivacyAccepted = false;
         
+        // General Data
+        public int HardCurrency = 0;
+        public int SoftCurrency = 0;
+        
         // Levels Data
         public int CurrentLevel = 0;
         public List<GameLevelModel> LevelDatas = new List<GameLevelModel>();

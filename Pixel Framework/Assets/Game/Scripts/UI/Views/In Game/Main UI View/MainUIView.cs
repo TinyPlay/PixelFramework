@@ -17,6 +17,8 @@
  */
 namespace HyperSample.UI.Views
 {
+    using System;
+    using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.UI;
     using UnityEngine.Events;
@@ -26,40 +28,28 @@ namespace HyperSample.UI.Views
     using PixelFramework.Components.Audio;
     
     /// <summary>
-    /// Main Menu View
+    /// Main UI View
     /// </summary>
-    internal class MainMenuView : BaseView
+    internal class MainUIView : BaseView
     {
         // Context
         [System.Serializable]
         public class Context : IViewContext
         {
             // Events
-            public UnityEvent<bool> OnPlayButtonClicked;
-            public UnityEvent OnSettingsButtonClicked;
-            public UnityEvent OnStoreButtonClicked;
-            
-            // Datas
-            public int CoinsValue = 0;
-            public int StarsValue = 0;
+            public UnityEvent<bool> OnGamePause;
+            public UnityEvent<int> OnCoinsProgress;
         }
         
         // View References
         [Header("View References")] 
-        [SerializeField] private Button _playButton;
-        [SerializeField] private Button _settingButton;
-        [SerializeField] private Button _storeButton;
+        [SerializeField] private Button _pauseMenuButton;
+        [SerializeField] private Text _coinsValue;
         [SerializeField] private AudioClip _clickSoundFX;
-
-        [Header("Currency References")] 
-        [SerializeField] private Text _coinsField;
-        [SerializeField] private Text _starsField;
-        
         
         // Private Params
         private AudioSource _audioSource;
-        private bool _isPanelShown = false;
-        
+
         /// <summary>
         /// On Context Initialized
         /// </summary>
@@ -78,25 +68,13 @@ namespace HyperSample.UI.Views
             }
             
             // Add Handlers
-            _playButton.onClick.AddListener(() =>
+            _pauseMenuButton.onClick.AddListener(() =>
             {
                 if(_audioSource.clip!=null) _audioSource.Play();
-                _isPanelShown = !_isPanelShown;
-                if(ctx.OnPlayButtonClicked!=null) ctx.OnPlayButtonClicked.Invoke(_isPanelShown);
+                ctx.OnGamePause.Invoke(true);
             });
-            _settingButton.onClick.AddListener(() =>
-            {
-                if(_audioSource.clip!=null) _audioSource.Play();
-                if(ctx.OnSettingsButtonClicked!=null) ctx.OnSettingsButtonClicked.Invoke();
-            });
-            _storeButton.onClick.AddListener(() =>
-            {
-                if(_audioSource.clip!=null) _audioSource.Play();
-                if(ctx.OnStoreButtonClicked!=null) ctx.OnStoreButtonClicked.Invoke();
-            });
-            
-            // Update View
-            UpdateView();
+            ctx.OnCoinsProgress.AddListener(UpdateCoinsView);
+            UpdateCoinsView(0);
         }
         
         /// <summary>
@@ -105,28 +83,17 @@ namespace HyperSample.UI.Views
         public override void OnViewDestroyed()
         {
             Context ctx = (Context) GetContext();
-            
-            // Remove Events Listeners
-            if(ctx.OnPlayButtonClicked!=null) ctx.OnPlayButtonClicked.RemoveAllListeners();
-            if(ctx.OnSettingsButtonClicked!=null) ctx.OnSettingsButtonClicked.RemoveAllListeners();
-            if(ctx.OnStoreButtonClicked!=null) ctx.OnStoreButtonClicked.RemoveAllListeners();
-            
-            // Remove Button Listeners
-            _playButton.onClick.RemoveAllListeners();
-            _settingButton.onClick.RemoveAllListeners();
-            _storeButton.onClick.RemoveAllListeners();
+            if(ctx.OnGamePause!=null) ctx.OnGamePause.RemoveAllListeners();
+            if(ctx.OnCoinsProgress!=null) ctx.OnCoinsProgress.RemoveAllListeners();
         }
 
         /// <summary>
-        /// Update View
+        /// Update Coins View
         /// </summary>
-        /// <returns></returns>
-        public override IBaseView UpdateView()
+        /// <param name="coinsValue"></param>
+        private void UpdateCoinsView(int coinsValue)
         {
-            Context ctx = (Context) GetContext();
-            _coinsField.text = ctx.CoinsValue.ToString("N0");
-            _starsField.text = ctx.StarsValue.ToString("N0");
-            return this;
+            _coinsValue.text = coinsValue.ToString("N0");
         }
     }
 }

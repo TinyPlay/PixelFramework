@@ -54,6 +54,32 @@
     {
       "Code": "level_header",
       "Value": "LEVEL"
+    },
+
+    {
+      "Code": "pause_header",
+      "Value": "PAUSE"
+    },
+    {
+      "Code": "continue_game",
+      "Value": "CONTIUNE"
+    },
+    {
+      "Code": "exit_to_menu",
+      "Value": "EXIT TO MENU"
+    },
+
+    {
+      "Code": "win_header",
+      "Value": "CONGRATS!"
+    },
+    {
+      "Code": "lose_header",
+      "Value": "YOU LOSE!"
+    },
+    {
+      "Code": "lose_desc",
+      "Value": "Unfortunately, you couldn't make it to the end of the level. \nBut we can try again!"
     }
   ]
 }

@@ -107,7 +107,6 @@ namespace PixelFramework.Managers
         /// </summary>
         public void PauseGame()
         {
-            Time.timeScale = 0;
             if(OnGamePaused!=null) OnGamePaused.Invoke(true);
         }
 
@@ -116,7 +115,6 @@ namespace PixelFramework.Managers
         /// </summary>
         public void UnpauseGame()
         {
-            Time.timeScale = 1;
             if(OnGamePaused!=null) OnGamePaused.Invoke(false);
         }
         #endregion

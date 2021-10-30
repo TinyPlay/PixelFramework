@@ -42,6 +42,7 @@ namespace HyperSample.UI.Views
             public UnityEvent<bool> OnLevelsOpen;
             public Action<int> OnLevelLaunched;
 
+            public int StarsValue = 0;
             public int CurrentLevel = 0;
             public List<GameLevelModel> Levels = new List<GameLevelModel>();
         }
@@ -51,6 +52,9 @@ namespace HyperSample.UI.Views
         [SerializeField] private AudioClip _clickSoundFX;
         [SerializeField] private Transform _levelsContainer;
         [SerializeField] private GameObject _levelItemTemplate;
+        
+        [Header("Currency References")] 
+        [SerializeField] private Text _starsField;
         
         // Private Params
         private AudioSource _audioSource;
@@ -108,6 +112,9 @@ namespace HyperSample.UI.Views
                 
                 if(_audioSource.clip!=null) _audioSource.Play();
             });
+            
+            // Update View
+            UpdateView();
         }
         
         /// <summary>
@@ -119,6 +126,17 @@ namespace HyperSample.UI.Views
             
             // General Handlers
             if(ctx.OnLevelsOpen!=null) ctx.OnLevelsOpen.RemoveAllListeners();
+        }
+
+        /// <summary>
+        /// Update View
+        /// </summary>
+        /// <returns></returns>
+        public override IBaseView UpdateView()
+        {
+            Context ctx = (Context) GetContext();
+            _starsField.text = ctx.StarsValue.ToString("N0");
+            return this;
         }
     }
 }

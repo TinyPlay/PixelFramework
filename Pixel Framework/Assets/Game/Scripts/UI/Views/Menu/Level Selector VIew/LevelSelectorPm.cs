@@ -88,7 +88,8 @@ namespace HyperSample.UI.Views
                 },
                 OnLevelsOpen = ctx.ShowLevelsPanel,
                 CurrentLevel = gameData.CurrentLevel,
-                Levels = levelsData
+                Levels = levelsData,
+                StarsValue = gameData.SoftCurrency
             });
         }
 
