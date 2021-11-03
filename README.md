@@ -10,6 +10,11 @@ Pixel Framwork is a set of the most necessary classes for developing your games.
 * **Utils Classes** like Coroutine Provider, UnixTime Manager etc.
 * And much more;
 
+`
+Please, note! This Framework is still under development.
+Currently Supported Unity Version: 2020.3+
+`
+
 ## Framework Documentation
 You can find documentation on the framework and its modules on <a href="https://github.com/TinyPlay/PixelFramework/wiki">our githab wiki pages</a>.
 
