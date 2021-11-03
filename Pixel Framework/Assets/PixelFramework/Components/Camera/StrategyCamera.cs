@@ -25,7 +25,7 @@ namespace PixelFramework.Components.Camera
     /// </summary>
     [RequireComponent(typeof(Camera))]
     [AddComponentMenu("Pixel Framework/Camera/Strategy Camera")]
-    internal class StrategyCamera : MonoBehaviour
+    public class StrategyCamera : MonoBehaviour
     {
         [Header("Camera Params")]
         [SerializeField] private bool CanCameraRotate;

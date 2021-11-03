@@ -15,11 +15,9 @@
  * @support         https://github.com/TinyPlay/PixelFramework/issues
  * @discord         https://discord.gg/wE67T7Vm
  */
-
-using System;
-
 namespace HyperSample.Installers
 {
+    using System;
     using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.Audio;
@@ -45,6 +43,8 @@ namespace HyperSample.Installers
         [SerializeField] private GameObject LoseUIPrefab;
         [SerializeField] private GameObject PauseUIPrefab;
         [SerializeField] private GameObject TutorialUIPrefab;
+        
+        [Header("Gameplay References")]
         
         // Private Params
         private int CoinsColleted = 0;
@@ -132,6 +132,14 @@ namespace HyperSample.Installers
             // Initialize Win UI
 
             // Initialize Lose UI
+            
+            // Initialize Player Controller
+            
+            // Initialize Finish Controller
+            
+            // Initialize Enemy Controller
+            
+            // Initialize Coins Controller
             
             // Initialize Hanlders
             OnMenuExit.AddListener(GoToTheMenu);
