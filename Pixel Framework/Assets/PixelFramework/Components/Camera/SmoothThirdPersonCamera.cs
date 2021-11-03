@@ -25,7 +25,7 @@ namespace PixelFramework.Components.Camera
     /// </summary>
     [RequireComponent(typeof(Camera))]
     [AddComponentMenu("Pixel Framework/Camera/Smooth Third Person")]
-    internal class SmoothThirdPersonCamera : MonoBehaviour
+    public class SmoothThirdPersonCamera : MonoBehaviour
     {
         [Header("Camera Params")]
         [SerializeField] private Transform Target;

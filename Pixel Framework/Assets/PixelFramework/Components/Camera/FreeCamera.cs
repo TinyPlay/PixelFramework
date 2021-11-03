@@ -30,7 +30,7 @@ namespace PixelFramework.Components.Camera
     /// </summary>
     [RequireComponent(typeof(Camera))]
     [AddComponentMenu("Pixel Framework/Camera/Free Camera")]
-    internal class FreeCamera : MonoBehaviour
+    public class FreeCamera : MonoBehaviour
     {
         [Header("Camera Params")]
         [SerializeField] private float lookSpeedH = 2f;
